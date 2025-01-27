@@ -8,7 +8,7 @@ export default class ElmSignin < HTMLElement
     super
 
     @h_btn_click_0 = lambda {|e| btn_click_values_are_valid(
-      e.detail.value.nickname, e.detail.value.password)}
+      e.detail.value.email, e.detail.value.password)}
 
     @language = Language.relevant.elm_signin
     
@@ -35,8 +35,8 @@ export default class ElmSignin < HTMLElement
     Bootstrap.change_disable_element(@c_inputs.input_login, !is_connected)
   end
 
-  def btn_click_values_are_valid(nickname, password)
-    @c_database.signin({nickname: nickname, password: password}) do |user_id|
+  def btn_click_values_are_valid(email, password)
+    @c_database.signin({email: email, password: password}) do |user_id|
 
       if user_id
         token, date = @c_protect.write_new_token()

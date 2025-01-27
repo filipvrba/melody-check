@@ -8,10 +8,10 @@ export default class CDatabase
   def signin(options, &callback)
     @c_spinner.set_display(true)
 
-    nickname      = options.nickname
+    email         = options.email.encode_base64()
     hash_password = options.password.encode_sha256()
 
-    query = "SELECT id FROM users WHERE nickname='#{nickname}' " +
+    query = "SELECT id FROM users WHERE email='#{email}' " +
             "AND hash_password='#{hash_password}';"
 
     Net.bef(query) do |rows|

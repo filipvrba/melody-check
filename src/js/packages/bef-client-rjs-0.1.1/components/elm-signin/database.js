@@ -7,9 +7,9 @@ export default class CDatabase {
 
   signin(options, callback) {
     this._cSpinner.setDisplay(true);
-    let nickname = options.nickname;
+    let email = options.email.encodeBase64();
     let hashPassword = options.password.encodeSha256();
-    let query = `SELECT id FROM users WHERE nickname='${nickname}' AND hash_password='${hashPassword}';`;
+    let query = `SELECT id FROM users WHERE email='${email}' AND hash_password='${hashPassword}';`;
 
     return Net.bef(query, (rows) => {
       let isSignin, userId;

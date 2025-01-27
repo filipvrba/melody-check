@@ -9,7 +9,7 @@ export default class ElmSignin extends HTMLElement {
 
     this._hBtnClick0 = e => (
       this.btnClickValuesAreValid(
-        e.detail.value.nickname,
+        e.detail.value.email,
         e.detail.value.password
       )
     );
@@ -40,8 +40,8 @@ export default class ElmSignin extends HTMLElement {
     )
   };
 
-  btnClickValuesAreValid(nickname, password) {
-    return this._cDatabase.signin({nickname, password}, (userId) => {
+  btnClickValuesAreValid(email, password) {
+    return this._cDatabase.signin({email, password}, (userId) => {
       let token, date;
 
       if (userId) {
