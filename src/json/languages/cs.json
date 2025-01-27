@@ -2,7 +2,9 @@
   "elmRoutes": {
     "titles": {
       "error": "Chyba",
-      "introduction": "Úvod"
+      "nointernet": "Bez internetu",
+      "introduction": "Úvod",
+      "signin": "Přihlásit se"
     },
     "meta": [
       "MelodyCheck – vaše hudební akce pod kontrolou"
@@ -10,5 +12,22 @@
     "languages": [
       "Čeština"
     ]
-  }
+  },
+  "elmSignin": [
+    "Přihlášení",
+    "Email",
+    "Zadejte svůj email",
+    "Špatný email",
+    "Heslo",
+    "Zadejte své heslo",
+    "Špatné heslo",
+    "Přihlásit se",
+    "Nemáte účet?",
+    "Zaregistrujte se"
+  ],
+  "elmNointernet": [
+    "Jste offline",
+    "Nemáte připojení k internetu. Zkontrolujte své připojení a zkuste to znovu.",
+    "Obnovit stránku"
+  ]
 }

@@ -3,11 +3,15 @@ import 'routesObj', '../../json/routes.json'
 window.ROUTES_JSON = routes_obj
 
 import 'errorHTML', '../../html/error.html?raw'
+import 'nointernetHTML', '../../html/nointernet.html?raw'
 import 'introductionHTML', '../../html/introduction.html?raw'
+import 'signinHTML', '../../html/signin.html?raw'
 
 window.PAGES = {
-  error: errorHTML,
+  error:        errorHTML,
+  nointernet:   nointernetHTML,
   introduction: introductionHTML,
+  signin:       signinHTML,
 }
 
 class Routes

@@ -5,8 +5,16 @@
       "priority": 0
     },
     {
+      "endpoint": "nointernet",
+      "priority": -1
+    },
+    {
       "endpoint": "introduction",
       "priority": 10
+    },
+    {
+      "endpoint": "signin",
+      "priority": 1
     }
   ]
 }
