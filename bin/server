@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rjsv -t -w -s src/rb -o src/js &
+rjsv -t -w -s 'src/root src/rb' -o '. src/js' &
 npm run dev
 
 trap - SIGINT
