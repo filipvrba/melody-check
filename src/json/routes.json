@@ -19,6 +19,14 @@
     {
       "endpoint": "signup",
       "priority": 1
+    },
+    {
+      "endpoint": "dashboard",
+      "priority": 1
+    },
+    {
+      "endpoint": "settings",
+      "priority": 1
     }
   ]
 }

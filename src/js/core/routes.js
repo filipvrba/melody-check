@@ -5,13 +5,17 @@ import nointernetHTML from "../../html/nointernet.html?raw";
 import introductionHTML from "../../html/introduction.html?raw";
 import signinHTML from "../../html/signin.html?raw";
 import signupHTML from "../../html/signup.html?raw";
+import dashboardHTML from "../../html/dashboard.html?raw";
+import settingsHTML from "../../html/settings.html?raw";
 
 window.PAGES = {
   error: errorHTML,
   nointernet: nointernetHTML,
   introduction: introductionHTML,
   signin: signinHTML,
-  signup: signupHTML
+  signup: signupHTML,
+  dashboard: dashboardHTML,
+  settings: settingsHTML
 };
 
 class Routes {

@@ -5,7 +5,9 @@
       "nointernet": "Bez internetu",
       "introduction": "Úvod",
       "signin": "Přihlásit se",
-      "signup": "Registrovat se"
+      "signup": "Registrovat se",
+      "dashboard": "Dashboard",
+      "settings": "Nastavení"
     },
     "meta": [
       "MelodyCheck – vaše hudební akce pod kontrolou"
@@ -45,5 +47,26 @@
     "Jste offline",
     "Nemáte připojení k internetu. Zkontrolujte své připojení a zkuste to znovu.",
     "Obnovit stránku"
+  ],
+  "elmDashboardHeaderAccount": [
+    "Účet",
+    "Přihlášen jako",
+    "Nastavení",
+    "Odhlásit se"
+  ],
+  "elmProfileEditing": [
+    "Vymazání účtu",
+    "Pokud chcete trvale smazat svůj účet, klikněte na tlačítko níže. Tento proces je nevratný.",
+    "Smazat účet",
+    "Opravdu chcete smazat svůj účet? Tento proces je nevratný.",
+    "Změna hesla",
+    "Aktuální heslo",
+    "Zadali jste špatné aktuální heslo vašeho účtu.",
+    "Nové heslo",
+    "Zadejte jiné heslo.",
+    "Potvrďte nové heslo",
+    "Hesla se neshodují.",
+    "Vaše nové heslo bylo úspěšně změněno.",
+    "Změnit heslo"
   ]
 }

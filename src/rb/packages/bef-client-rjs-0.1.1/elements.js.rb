@@ -7,3 +7,12 @@ window.custom_elements.define('elm-signup', ElmSignup)
 
 import 'ElmNointernet', './elements/elm_nointernet'
 window.custom_elements.define('elm-nointernet', ElmNointernet)
+
+import 'ElmHeader', './elements/elm_header'
+window.custom_elements.define('elm-header', ElmHeader)
+
+import 'ElmHeaderAccount', './elements/elm_header_account'
+window.custom_elements.define('elm-header-account', ElmHeaderAccount)
+
+import 'ElmProfileEditing', './elements/elm_profile_editing'
+window.custom_elements.define('elm-profile-editing', ElmProfileEditing)
