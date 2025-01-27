@@ -1,0 +1,14 @@
+{
+  "elmRoutes": {
+    "titles": {
+      "error": "Chyba",
+      "introduction": "Úvod"
+    },
+    "meta": [
+      "MelodyCheck – vaše hudební akce pod kontrolou"
+    ],
+    "languages": [
+      "Čeština"
+    ]
+  }
+}

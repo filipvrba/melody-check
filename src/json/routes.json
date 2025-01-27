@@ -1,0 +1,12 @@
+{
+  "pages": [
+    {
+      "endpoint": "error",
+      "priority": 0
+    },
+    {
+      "endpoint": "introduction",
+      "priority": 10
+    }
+  ]
+}
