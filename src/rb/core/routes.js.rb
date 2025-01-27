@@ -6,12 +6,14 @@ import 'errorHTML', '../../html/error.html?raw'
 import 'nointernetHTML', '../../html/nointernet.html?raw'
 import 'introductionHTML', '../../html/introduction.html?raw'
 import 'signinHTML', '../../html/signin.html?raw'
+import 'signupHTML', '../../html/signup.html?raw'
 
 window.PAGES = {
   error:        errorHTML,
   nointernet:   nointernetHTML,
   introduction: introductionHTML,
   signin:       signinHTML,
+  signup:       signupHTML,
 }
 
 class Routes

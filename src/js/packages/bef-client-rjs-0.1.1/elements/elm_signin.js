@@ -1,7 +1,7 @@
 import CInputs from "../components/elm-signin/inputs";
 import CDatabase from "../components/elm-signin/database";
 import CProtect from "../components/elm-signin/protect";
-import CSpinner from "../components/elm-signin/spinner";
+import CSpinner from "../../template-rjs-0.1.1/components/spinner";
 
 export default class ElmSignin extends HTMLElement {
   constructor() {

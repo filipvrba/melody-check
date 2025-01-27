@@ -59,7 +59,8 @@ export default class CInputs {
   };
 
   haveEmail() {
-    return this._inputEmail.value.length > 0
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/m;
+    return this._inputEmail.value.length > 0 && emailRegex.test(this._inputEmail.value)
   };
 
   havePassword() {

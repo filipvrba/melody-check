@@ -4,7 +4,8 @@
       "error": "Chyba",
       "nointernet": "Bez internetu",
       "introduction": "Úvod",
-      "signin": "Přihlásit se"
+      "signin": "Přihlásit se",
+      "signup": "Registrovat se"
     },
     "meta": [
       "MelodyCheck – vaše hudební akce pod kontrolou"
@@ -24,6 +25,21 @@
     "Přihlásit se",
     "Nemáte účet?",
     "Zaregistrujte se"
+  ],
+  "elmSignup": [
+    "Registrace",
+    "Email",
+    "Zadejte svůj email",
+    "Špatný email",
+    "Heslo",
+    "Zadejte své heslo",
+    "Špatné heslo",
+    "Ověření hesla",
+    "Zadejte heslo znovu",
+    "Hesla se neshodují",
+    "Registrovat",
+    "Již máte účet?",
+    "Přihlaste se"
   ],
   "elmNointernet": [
     "Jste offline",

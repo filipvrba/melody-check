@@ -45,7 +45,10 @@ export default class CInputs
   end
 
   def have_email()
-    @input_email.value.length > 0
+    email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+    @input_email.value.length > 0 &&
+    email_regex.test(@input_email.value)
   end
 
   def have_password()

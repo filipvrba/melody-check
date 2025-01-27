@@ -1,7 +1,7 @@
 import 'CInputs', '../components/elm-signin/inputs'
 import 'CDatabase', '../components/elm-signin/database'
 import 'CProtect', '../components/elm-signin/protect'
-import 'CSpinner', '../components/elm-signin/spinner'
+import 'CSpinner', '../../template-rjs-0.1.1/components/spinner'
 
 export default class ElmSignin < HTMLElement
   def initialize
