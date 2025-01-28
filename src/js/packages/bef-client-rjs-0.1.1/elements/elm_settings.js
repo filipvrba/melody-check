@@ -1,4 +1,4 @@
-import AProtected from "../packages/bef-client-rjs-0.1.1/elements/abstracts/protected";
+import AProtected from "./abstracts/protected";
 
 export default class ElmSettings extends AProtected {
   constructor() {
@@ -8,18 +8,7 @@ export default class ElmSettings extends AProtected {
   };
 
   protectedCallback() {
-    if (!this._categories) {
-      this._categories = [
-        {index: "events", name: "Události", content: ""},
-
-        {
-          index: "profile",
-          name: "Profil",
-          content: `<elm-profile-editing user-id='${this._userId}'></elm-profile-editing>`
-        }
-      ]
-    };
-
+    if (!this._categories) this._categories = Settings.getCategories(this._userId);
     return this.initElm()
   };
 

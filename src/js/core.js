@@ -5,4 +5,5 @@ import "./core/language";
 import "./core/url_params";
 import "./core/cookie";
 import "./core/bootstrap";
-import "./core/string"
+import "./core/string";
+import "./core/settings"

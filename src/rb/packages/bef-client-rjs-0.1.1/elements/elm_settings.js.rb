@@ -1,4 +1,4 @@
-import 'AProtected', '../packages/bef-client-rjs-0.1.1/elements/abstracts/protected'
+import 'AProtected', './abstracts/protected'
 
 export default class ElmSettings < AProtected
   def initialize
@@ -11,18 +11,7 @@ export default class ElmSettings < AProtected
 
   def protected_callback()
     unless @categories
-      @categories = [
-        {
-          index: 'events',
-          name: 'Události',
-          content: ""
-        },
-        {
-          index: 'profile',
-          name: 'Profil',
-          content: "<elm-profile-editing user-id='#{@user_id}'></elm-profile-editing>"
-        }
-      ]
+      @categories = Settings.get_categories(@user_id)
     end
 
     init_elm()
