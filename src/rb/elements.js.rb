@@ -7,3 +7,9 @@ window.custom_elements.define('elm-dashboard', ElmDashboard)
 
 import 'ElmEventSettings', './elements/elm_event_settings'
 window.custom_elements.define('elm-event-settings', ElmEventSettings)
+
+import 'ElmDashboardCandidates', './elements/dashboard/elm_candidates'
+window.custom_elements.define('elm-dashboard-candidates', ElmDashboardCandidates)
+
+import 'ElmDashboardInformation', './elements/dashboard/elm_information'
+window.custom_elements.define('elm-dashboard-information', ElmDashboardInformation)
