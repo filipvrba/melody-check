@@ -3,6 +3,7 @@
     "titles": {
       "error": "Chyba",
       "nointernet": "Bez internetu",
+      "confirm": "Potvrzení",
       "introduction": "Úvod",
       "signin": "Přihlásit se",
       "signup": "Registrovat se",

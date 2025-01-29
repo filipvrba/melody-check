@@ -16,4 +16,9 @@ import ElmDashboardInformation from "./elements/dashboard/elm_information";
 window.customElements.define(
   "elm-dashboard-information",
   ElmDashboardInformation
-)
+);
+
+import ElmEmailSettings from "./elements/elm_email_settings";
+window.customElements.define("elm-email-settings", ElmEmailSettings);
+import ElmConfirm from "./elements/elm_confirm";
+window.customElements.define("elm-confirm", ElmConfirm)

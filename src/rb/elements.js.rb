@@ -13,3 +13,9 @@ window.custom_elements.define('elm-dashboard-candidates', ElmDashboardCandidates
 
 import 'ElmDashboardInformation', './elements/dashboard/elm_information'
 window.custom_elements.define('elm-dashboard-information', ElmDashboardInformation)
+
+import 'ElmEmailSettings', './elements/elm_email_settings'
+window.custom_elements.define('elm-email-settings', ElmEmailSettings)
+
+import 'ElmConfirm', './elements/elm_confirm'
+window.custom_elements.define('elm-confirm', ElmConfirm)

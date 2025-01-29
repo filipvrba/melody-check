@@ -8,6 +8,12 @@ export default class Settings {
       },
 
       {
+        index: "email",
+        name: "Email",
+        content: `<elm-email-settings user-id='${userId}'></elm-email-settings>`
+      },
+
+      {
         index: "profile",
         name: "Profil",
         content: `<elm-profile-editing user-id='${userId}'></elm-profile-editing>`
