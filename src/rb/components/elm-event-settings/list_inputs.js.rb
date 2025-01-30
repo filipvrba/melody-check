@@ -16,6 +16,7 @@ export default class CListInputs
 
     window.event_settings_list_add_btn_click    = add_btn_click
     window.event_settings_list_remove_btn_click = remove_btn_click
+    window.event_settings_list_btn_form_click   = btn_form_click
   end
 
   def connected_callback()
@@ -55,6 +56,10 @@ export default class CListInputs
         @parent.c_contents.update_list_container()
       end
     end
+  end
+
+  def btn_form_click()
+    window.open("/?event_id=#{@parent.event_id}#event-signup", '_blank')
   end
 
   def input_full_name_keypress()

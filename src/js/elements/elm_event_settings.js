@@ -158,7 +158,15 @@ export default class ElmEventSettings extends HTMLElement {
     <elm-spinner id='spinnerTwo' class='spinner-overlay'></elm-spinner>
 
     <div class='card-body'>
-      <h5 class='card-title'>Účastníci</h5>
+      <div class='d-flex justify-content-between align-items-center'>
+        <h5 class='card-title'>Účastníci</h5>
+      
+        <button type='button' class='btn btn-outline-primary btn-sm' onclick='eventSettingsListBtnFormClick()'>
+          <i class='bi bi-box-arrow-up-right'></i> Formulář
+        </button>
+      </div>
+      
+
       <div class='row g-3'>
         <div class='col-md-5'>
           <label for='eventSettingsListInputFullname' class='form-label'>Celé Jméno</label>
@@ -180,6 +188,7 @@ export default class ElmEventSettings extends HTMLElement {
           </button>
         </div>
       </div>
+
       <ul id='eventSettingsListContainer' class='list-group mt-4'>
         <!-- Místo pro seznam účastníků -->
       </ul>

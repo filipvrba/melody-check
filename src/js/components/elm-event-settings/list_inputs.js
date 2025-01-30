@@ -14,7 +14,8 @@ export default class CListInputs {
     this._inputEmail = this._parent.querySelector("#eventSettingsListInputEmail");
     this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
     window.eventSettingsListAddBtnClick = this.addBtnClick.bind(this);
-    window.eventSettingsListRemoveBtnClick = this.removeBtnClick.bind(this)
+    window.eventSettingsListRemoveBtnClick = this.removeBtnClick.bind(this);
+    window.eventSettingsListBtnFormClick = this.btnFormClick.bind(this)
   };
 
   connectedCallback() {
@@ -66,6 +67,13 @@ export default class CListInputs {
       (message) => {
         if (message) return this._parent.cContents.updateListContainer()
       }
+    )
+  };
+
+  btnFormClick() {
+    return window.open(
+      `/?event_id=${this._parent.eventId}#event-signup`,
+      "_blank"
     )
   };
 
