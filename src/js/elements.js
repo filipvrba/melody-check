@@ -21,4 +21,6 @@ window.customElements.define(
 import ElmEmailSettings from "./elements/elm_email_settings";
 window.customElements.define("elm-email-settings", ElmEmailSettings);
 import ElmConfirm from "./elements/elm_confirm";
-window.customElements.define("elm-confirm", ElmConfirm)
+window.customElements.define("elm-confirm", ElmConfirm);
+import ElmEventSignup from "./elements/elm_event_signup";
+window.customElements.define("elm-event-signup", ElmEventSignup)
