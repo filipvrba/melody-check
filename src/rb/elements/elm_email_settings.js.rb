@@ -69,7 +69,7 @@ export default class ElmEmailSettings < HTMLElement
 
       <!-- Obsah e-mailu -->
       <textarea class='form-control' id='mailSettingsRegisteredTemplate' rows='10' placeholder='Vložte HTML šablonu pro registrované účastníky'></textarea>
-      <div class='form-text'>Použijte HTML kód pro vytvoření e-mailu. Můžete využít značky jako <code>FULLNAME</code>, <code>EVENTNAME</code> a <code>EVENTDATE</code>.</div>
+      <div class='form-text'>Použijte HTML kód pro vytvoření e-mailu. Můžete využít značky jako <code>FULLNAME</code>, <code>EVENTNAME</code>, <code>EVENTDATE</code> a <code>CONFIRMBTN</code>.</div>
     </div>
   </div>
 
@@ -89,7 +89,7 @@ export default class ElmEmailSettings < HTMLElement
 
       <!-- Obsah e-mailu -->
       <textarea class='form-control' id='mailSettingsUnconfirmedTemplate' rows='10' placeholder='Vložte HTML šablonu pro nepotvrzené účastníky'></textarea>
-      <div class='form-text'>Použijte HTML kód pro vytvoření e-mailu. Můžete využít značky jako <code>FULLNAME</code>, <code>EVENTNAME</code> a <code>EVENTDATE</code>.</div>
+      <div class='form-text'>Použijte HTML kód pro vytvoření e-mailu. Můžete využít značky jako <code>FULLNAME</code>, <code>EVENTNAME</code>, <code>EVENTDATE</code> a <code>CONFIRMBTN</code>.</div>
     </div>
   </div>
 
