@@ -85,6 +85,13 @@ export default class ElmEventSettings extends HTMLElement {
 
   eventCallback(eventId) {
     this._eventId = eventId;
+
+    Events.emit(
+      "#app",
+      ElmEventSettings.ENVS.eventCallback,
+      this._eventId
+    );
+
     this._cContents.changeVisibility(true);
     return this._cContents.updateListContainer()
   };
@@ -182,4 +189,6 @@ export default class ElmEventSettings extends HTMLElement {
     `}`;
     return this.innerHTML = template
   }
-}
+};
+
+ElmEventSettings.ENVS = {eventCallback: "ees-event-callback"}

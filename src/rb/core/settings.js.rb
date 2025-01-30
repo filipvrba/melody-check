@@ -7,8 +7,8 @@ export default class Settings
         content: "<elm-event-settings user-id='#{user_id}'></elm-event-settings>"
       },
       {
-        index: 'email',
-        name: 'Email',
+        index: 'templates',
+        name: 'Šablony',
         content: "<elm-email-settings user-id='#{user_id}'></elm-email-settings>"
       },
       {

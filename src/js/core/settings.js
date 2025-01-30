@@ -8,8 +8,8 @@ export default class Settings {
       },
 
       {
-        index: "email",
-        name: "Email",
+        index: "templates",
+        name: "Šablony",
         content: `<elm-email-settings user-id='${userId}'></elm-email-settings>`
       },
 

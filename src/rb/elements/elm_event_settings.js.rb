@@ -5,6 +5,10 @@ import 'CContents', '../components/elm-event-settings/contents'
 import 'CSpinner', '../packages/template-rjs-0.1.1/components/spinner'
 
 export default class ElmEventSettings < HTMLElement
+  ENVS = {
+    event_callback: 'ees-event-callback'
+  }
+
   attr_reader :user_id, :event_id, :c_spinner, :c_database, :c_contents
 
   def initialize
@@ -45,6 +49,8 @@ export default class ElmEventSettings < HTMLElement
 
   def event_callback(event_id)
     @event_id = event_id
+
+    Events.emit('#app', ENVS.event_callback, @event_id)
 
     @c_contents.change_visibility(true)
     @c_contents.update_list_container()
