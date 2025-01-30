@@ -6,6 +6,8 @@ export default class ElmDashboardCandidates < HTMLElement
   def initialize
     super
     
+    @h_update_delay = lambda {|e| update_delay(e.detail.value) }
+
     @event_id = self.get_attribute('event-id')
 
     init_elm()
@@ -16,6 +18,20 @@ export default class ElmDashboardCandidates < HTMLElement
   end
 
   def connected_callback()
+    Events.connect('#app', 'updateDelay', @h_update_delay)
+
+    update_list_body()
+  end
+
+  def disconnected_callback()
+    Events.disconnect('#app', 'updateDelay', @h_update_delay)
+  end
+
+  def update_delay(is_connected)
+    update_list_body() if is_connected
+  end
+
+  def update_list_body()
     @c_database.get_candidates() do |candidates|
       elements = []
       have_candidates = candidates.length > 0
@@ -50,9 +66,6 @@ export default class ElmDashboardCandidates < HTMLElement
         """
       end
     end
-  end
-
-  def disconnected_callback()
   end
 
   def init_elm()

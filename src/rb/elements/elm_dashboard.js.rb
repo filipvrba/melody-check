@@ -1,5 +1,6 @@
 import 'AProtected', '../packages/bef-client-rjs-0.1.1/elements/abstracts/protected'
-import 'CDatabase', '../components/elm-dashboard/database'
+import 'CTimer',     '../packages/bef-client-rjs-0.1.1/components/timer'
+import 'CDatabase',  '../components/elm-dashboard/database'
 
 export default class ElmDashboard < AProtected
   attr_reader :user_id, :c_database
@@ -10,6 +11,7 @@ export default class ElmDashboard < AProtected
     @event_id   = nil
     @contents   = nil
     @c_database = CDatabase.new(self)
+    @c_timer    = CTimer.new(60)
   end
 
   def protected_callback()
@@ -21,6 +23,14 @@ export default class ElmDashboard < AProtected
     init_elm()
 
     @dashboard_container = self.query_selector('#dashboardContainer')
+  end
+
+  def connected_callback()
+    @c_timer.connected_callback()
+  end
+
+  def disconnected_callback()
+    @c_timer.disconnected_callback()
   end
 
   def update_content_container()

@@ -6,4 +6,5 @@ import "./core/url_params";
 import "./core/cookie";
 import "./core/bootstrap";
 import "./core/string";
-import "./core/settings"
+import "./core/settings";
+import "./core/clock"

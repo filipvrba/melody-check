@@ -1,4 +1,5 @@
 import AProtected from "../packages/bef-client-rjs-0.1.1/elements/abstracts/protected";
+import CTimer from "../packages/bef-client-rjs-0.1.1/components/timer";
 import CDatabase from "../components/elm-dashboard/database";
 
 export default class ElmDashboard extends AProtected {
@@ -14,7 +15,8 @@ export default class ElmDashboard extends AProtected {
     super();
     this._eventId = null;
     this._contents = null;
-    this._cDatabase = new CDatabase(this)
+    this._cDatabase = new CDatabase(this);
+    this._cTimer = new CTimer(60)
   };
 
   protectedCallback() {
@@ -26,6 +28,14 @@ export default class ElmDashboard extends AProtected {
     this.initElm();
     this._dashboardContainer = this.querySelector("#dashboardContainer");
     return this._dashboardContainer
+  };
+
+  connectedCallback() {
+    return this._cTimer.connectedCallback()
+  };
+
+  disconnectedCallback() {
+    return this._cTimer.disconnectedCallback()
   };
 
   updateContentContainer() {

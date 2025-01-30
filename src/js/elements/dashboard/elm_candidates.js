@@ -7,6 +7,7 @@ export default class ElmDashboardCandidates extends HTMLElement {
 
   constructor() {
     super();
+    this._hUpdateDelay = e => this.updateDelay(e.detail.value);
     this._eventId = this.getAttribute("event-id");
     this.initElm();
     this._listBody = this.querySelector("#dashboardCandidatesListBody");
@@ -14,6 +15,19 @@ export default class ElmDashboardCandidates extends HTMLElement {
   };
 
   connectedCallback() {
+    Events.connect("#app", "updateDelay", this._hUpdateDelay);
+    return this.updateListBody()
+  };
+
+  disconnectedCallback() {
+    return Events.disconnect("#app", "updateDelay", this._hUpdateDelay)
+  };
+
+  updateDelay(isConnected) {
+    if (isConnected) return this.updateListBody()
+  };
+
+  updateListBody() {
     return this._cDatabase.getCandidates((candidates) => {
       let elements = [];
       let haveCandidates = candidates.length > 0;
@@ -47,10 +61,6 @@ export default class ElmDashboardCandidates extends HTMLElement {
         `}`
       }
     })
-  };
-
-  disconnectedCallback() {
-    return null
   };
 
   initElm() {
