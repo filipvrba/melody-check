@@ -18,11 +18,11 @@
     },
     {
       "endpoint": "introduction",
-      "priority": 1
+      "priority": 10
     },
     {
       "endpoint": "signin",
-      "priority": 10
+      "priority": 1
     },
     {
       "endpoint": "signup",

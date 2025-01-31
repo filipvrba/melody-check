@@ -1,0 +1,10 @@
+.hero-section {
+  background-image: url('/jpg/bg_hero_02.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.shadow-xl {
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.8);
+}
