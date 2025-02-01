@@ -21,7 +21,8 @@ export default class ElmSettings extends AProtected {
   };
 
   categoryBtnClick(index) {
-    return URLParams.set("sc-index", index)
+    URLParams.set("sc-index", index);
+    return Events.emit("#app", ElmSettings.ENVS.categoryClick)
   };
 
   initElm() {
@@ -55,7 +56,7 @@ export default class ElmSettings extends AProtected {
         <button onclick='profileSettingsCategoryBtnClick(${i})' class='nav-link ${isActivated ? "active" : null}' id='pills-${category.index}-tab' data-bs-toggle='pill' data-bs-target='#pills-${category.index}' type='button' role='tab' aria-controls='pills-${category.index}' aria-selected='true'>${category.name}</button>
       </li>
       `}`;
-      let contentTemplate = `${`\n      <div onclick='profileSettingsCategoryBtnClick(${i})' class='tab-pane fade ${isActivated ? "show active" : null}' id='pills-${category.index}' role='tabpanel' aria-labelledby='pills-${category.index}-tab' tabindex='0'>${category.content}</div>\n      `}`;
+      let contentTemplate = `${`\n      <div class='tab-pane fade ${isActivated ? "show active" : null}' id='pills-${category.index}' role='tabpanel' aria-labelledby='pills-${category.index}-tab' tabindex='0'>${category.content}</div>\n      `}`;
       aLis.push(liTemplate);
       return aContents.push(contentTemplate)
     });
@@ -73,4 +74,6 @@ export default class ElmSettings extends AProtected {
 
     return resultingIndex
   }
-}
+};
+
+ElmSettings.ENVS = {categoryClick: "ess-cbc-0"}

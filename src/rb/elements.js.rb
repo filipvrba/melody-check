@@ -22,3 +22,12 @@ window.custom_elements.define('elm-confirm', ElmConfirm)
 
 import 'ElmEventSignup', './elements/elm_event_signup'
 window.custom_elements.define('elm-event-signup', ElmEventSignup)
+
+import 'ElmEventsSettings', './elements/elm_events_settings'
+window.custom_elements.define('elm-events-settings', ElmEventsSettings)
+
+import 'ElmUserTypeSettings', './elements/elm_user_type_settings'
+window.custom_elements.define('elm-user-type-settings', ElmUserTypeSettings)
+
+import 'ElmEventsViewer', './elements/elm_events_viewer'
+window.custom_elements.define('elm-events-viewer', ElmEventsViewer)

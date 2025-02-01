@@ -40,13 +40,14 @@ export default class ElmEventSettings extends HTMLElement {
     );
 
     this._userId = this.getAttribute("user-id");
-    this._eventId = null;
+    this._eventId = this.getAttribute("event-id");
     this.initElm();
     this._cSpinner = new CSpinner(this);
     this._cDatabase = new CDatabase(this);
     this._cEventInputs = new CEventInputs(this);
     this._cListInputs = new CListInputs(this);
-    this._cContents = new CContents(this)
+    this._cContents = new CContents(this);
+    this._cEventInputs.updateEventDetails(this._eventId)
   };
 
   connectedCallback() {

@@ -1,6 +1,10 @@
 import 'AProtected', './abstracts/protected'
 
 export default class ElmSettings < AProtected
+  ENVS = {
+    category_click: 'ess-cbc-0',
+  }
+
   def initialize
     super
 
@@ -25,6 +29,7 @@ export default class ElmSettings < AProtected
 
   def category_btn_click(index)
     URLParams.set('sc-index', index)
+    Events.emit('#app', ENVS.category_click)
   end
 
   def init_elm()
@@ -61,7 +66,7 @@ export default class ElmSettings < AProtected
       </li>
       """
       content_template = """
-      <div onclick='profileSettingsCategoryBtnClick(#{i})' class='tab-pane fade #{'show active' if is_activated}' id='pills-#{category.index}' role='tabpanel' aria-labelledby='pills-#{category.index}-tab' tabindex='0'>#{category.content}</div>
+      <div class='tab-pane fade #{'show active' if is_activated}' id='pills-#{category.index}' role='tabpanel' aria-labelledby='pills-#{category.index}-tab' tabindex='0'>#{category.content}</div>
       """
 
       a_lis.push(li_template)

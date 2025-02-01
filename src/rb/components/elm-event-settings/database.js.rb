@@ -15,11 +15,15 @@ export default class CDatabase
 
       have_event = rows.length > 0
       if have_event
-        event_name = rows[0]['event_name'].decode_base64()
-        event_date = rows[0]['event_date'].decode_base64()
+        decode_rows = rows.map do |h|
+          {
+            id:   h.id,
+            name: h['event_name'].decode_base64(),
+            date: h['event_date'].decode_base64(),
+          }
+        end
 
-        result = { id: rows[0].id, title: event_name, date: event_date }
-        callback(result) if callback
+        callback(decode_rows) if callback
       else
         callback(nil) if callback
       end

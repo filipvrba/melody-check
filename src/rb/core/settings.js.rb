@@ -18,5 +18,18 @@ export default class Settings
       }
     ]
   end
+
+  def self.get_user_type_categories(user_id, user_type)
+    case user_type
+    when 1
+      return Settings.get_categories(user_id)
+    when 2
+      return [{
+        index: 'events',
+        name: 'Události',
+        content: "<elm-events-viewer user-id='#{user_id}'></elm-events-viewer>"
+      }, *Settings.get_categories(user_id).slice(1)]
+    end
+  end
 end
 window.Settings = Settings

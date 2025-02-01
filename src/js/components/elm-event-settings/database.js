@@ -10,15 +10,18 @@ export default class CDatabase {
     this._parent.cSpinner.setDisplayWithId(true, "#spinnerOne");
 
     return Net.bef(query, (rows) => {
-      let eventName, eventDate, result;
+      let decodeRows;
       this._parent.cSpinner.setDisplayWithId(false, "#spinnerOne");
       let haveEvent = rows.length > 0;
 
       if (haveEvent) {
-        eventName = rows[0].event_name.decodeBase64();
-        eventDate = rows[0].event_date.decodeBase64();
-        result = {id: rows[0].id, title: eventName, date: eventDate};
-        if (callback) return callback(result)
+        decodeRows = rows.map(h => ({
+          id: h.id,
+          name: h.event_name.decodeBase64(),
+          date: h.event_date.decodeBase64()
+        }));
+
+        if (callback) return callback(decodeRows)
       } else if (callback) {
         return callback(null)
       }

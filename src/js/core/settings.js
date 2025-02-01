@@ -19,6 +19,25 @@ export default class Settings {
         content: `<elm-profile-editing user-id='${userId}'></elm-profile-editing>`
       }
     ]
+  };
+
+  static getUserTypeCategories(userId, userType) {
+    switch (userType) {
+    case 1:
+      return Settings.getCategories(userId);
+
+    case 2:
+
+      return [
+        {
+          index: "events",
+          name: "Události",
+          content: `<elm-events-viewer user-id='${userId}'></elm-events-viewer>`
+        },
+
+        ...Settings.getCategories(userId).slice(1)
+      ]
+    }
   }
 };
 

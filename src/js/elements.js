@@ -23,4 +23,20 @@ window.customElements.define("elm-email-settings", ElmEmailSettings);
 import ElmConfirm from "./elements/elm_confirm";
 window.customElements.define("elm-confirm", ElmConfirm);
 import ElmEventSignup from "./elements/elm_event_signup";
-window.customElements.define("elm-event-signup", ElmEventSignup)
+window.customElements.define("elm-event-signup", ElmEventSignup);
+import ElmEventsSettings from "./elements/elm_events_settings";
+
+window.customElements.define(
+  "elm-events-settings",
+  ElmEventsSettings
+);
+
+import ElmUserTypeSettings from "./elements/elm_user_type_settings";
+
+window.customElements.define(
+  "elm-user-type-settings",
+  ElmUserTypeSettings
+);
+
+import ElmEventsViewer from "./elements/elm_events_viewer";
+window.customElements.define("elm-events-viewer", ElmEventsViewer)

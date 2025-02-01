@@ -12,7 +12,6 @@ export default class CEventInputs {
 
     this._inputTitle = this._parent.querySelector("#eventSettingsEventTitle");
     this._inputDate = this._parent.querySelector("#eventSettingsEventDate");
-    this.updateEventDetails();
     window.eventSettingsEventSaveDetailsBtnClick = this.saveDetailsBtnClick.bind(this)
   };
 
@@ -74,10 +73,19 @@ export default class CEventInputs {
 
   updateEventDetails() {
     return this._parent.cDatabase.getEventDetails((eventDetails) => {
+      let relevantEventDetail;
+
       if (eventDetails) {
-        this._parent.eventCallback(eventDetails.id);
-        this._inputTitle.value = eventDetails.title;
-        return this._inputDate.value = eventDetails.date
+        if (this._parent.eventId) {
+          relevantEventDetail = eventDetails.find(e => e.id === this._parent.eventId);
+          this._parent.eventCallback(relevantEventDetail.id);
+          this._inputTitle.value = relevantEventDetail.name;
+          return this._inputDate.value = relevantEventDetail.date
+        } else {
+          this._parent.eventCallback(eventDetails[0].id);
+          this._inputTitle.value = eventDetails[0].name;
+          return this._inputDate.value = eventDetails[0].date
+        }
       }
     })
   }

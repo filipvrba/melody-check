@@ -12,8 +12,6 @@ export default class CEventInputs
     @input_title = @parent.query_selector('#eventSettingsEventTitle')
     @input_date  = @parent.query_selector('#eventSettingsEventDate')
 
-    update_event_details()
-
     window.event_settings_event_save_details_btn_click = save_details_btn_click
   end
 
@@ -72,10 +70,20 @@ export default class CEventInputs
     @parent.c_database.get_event_details() do |event_details|
 
       if event_details
-        @parent.event_callback(event_details.id)
 
-        @input_title.value = event_details.title
-        @input_date.value  = event_details.date
+        if @parent.event_id
+          relevant_event_detail = event_details.find() {|e| e.id == @parent.event_id}
+
+          @parent.event_callback(relevant_event_detail.id)
+
+          @input_title.value = relevant_event_detail.name
+          @input_date.value  = relevant_event_detail.date
+        else
+          @parent.event_callback(event_details[0].id)
+
+          @input_title.value = event_details[0].name
+          @input_date.value  = event_details[0].date
+        end
       end
     end
   end

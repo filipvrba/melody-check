@@ -20,7 +20,7 @@ export default class ElmEventSettings < HTMLElement
       e.detail.value.full_name, e.detail.value.email)}
 
     @user_id  = self.get_attribute('user-id')
-    @event_id = nil
+    @event_id = self.get_attribute('event-id')
 
     init_elm()
 
@@ -29,6 +29,8 @@ export default class ElmEventSettings < HTMLElement
     @c_event_inputs = CEventInputs.new(self)
     @c_list_inputs  = CListInputs.new(self)
     @c_contents     = CContents.new(self)
+
+    @c_event_inputs.update_event_details(@event_id)
   end
 
   def connected_callback()
