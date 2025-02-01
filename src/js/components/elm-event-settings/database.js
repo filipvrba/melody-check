@@ -6,7 +6,7 @@ export default class CDatabase {
   };
 
   getEventDetails(callback) {
-    let query = `SELECT id, event_name, event_date FROM events WHERE user_id = ${this._parent.userId};`;
+    let query = `SELECT id, event_name, event_date FROM events WHERE user_id = ${this._parent.userId} ORDER BY created_at ASC;`;
     this._parent.cSpinner.setDisplayWithId(true, "#spinnerOne");
 
     return Net.bef(query, (rows) => {
@@ -28,7 +28,8 @@ export default class CDatabase {
   setEventDetails(title, date, callback) {
     let eventName = title.encodeBase64();
     let eventDate = date.encodeBase64();
-    let query = `INSERT INTO events (user_id, event_name, event_date) VALUES (${this._parent.userId}, '${eventName}', '${eventDate}') ON CONFLICT(user_id) DO UPDATE SET event_name = excluded.event_name, event_date = excluded.event_date;`;
+    let eventId = this._parent.eventId || "NULL";
+    let query = `INSERT INTO events (id, user_id, event_name, event_date) VALUES (${eventId}, ${this._parent.userId}, '${eventName}', '${eventDate}') ON CONFLICT(id) DO UPDATE SET event_name = excluded.event_name, event_date = excluded.event_date;`;
     this._parent.cSpinner.setDisplayWithId(true, "#spinnerOne");
 
     return Net.bef(query, (message) => {

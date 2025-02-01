@@ -6,7 +6,8 @@ export default class CDatabase
   end
 
   def get_event_details(&callback)
-    query = "SELECT id, event_name, event_date FROM events WHERE user_id = #{@parent.user_id};"
+    query = "SELECT id, event_name, event_date FROM events " +
+            "WHERE user_id = #{@parent.user_id} ORDER BY created_at ASC;"
 
     @parent.c_spinner.set_display_with_id(true, '#spinnerOne')
     Net.bef(query) do |rows|
@@ -28,12 +29,13 @@ export default class CDatabase
   def set_event_details(title, date, &callback)
     event_name = title.encode_base64()
     event_date = date.encode_base64()
+    event_id   = @parent.event_id || 'NULL'
 
-    query = "INSERT INTO events (user_id, event_name, event_date) " +
-            "VALUES (#{@parent.user_id}, '#{event_name}', '#{event_date}') " +
-            "ON CONFLICT(user_id) DO UPDATE " +
+    query = "INSERT INTO events (id, user_id, event_name, event_date) " +
+            "VALUES (#{event_id}, #{@parent.user_id}, '#{event_name}', '#{event_date}') " +
+            "ON CONFLICT(id) DO UPDATE " +
             "SET event_name = excluded.event_name, event_date = excluded.event_date;"
-    
+
     @parent.c_spinner.set_display_with_id(true, '#spinnerOne')
     Net.bef(query) do |message|
       @parent.c_spinner.set_display_with_id(false, '#spinnerOne')
