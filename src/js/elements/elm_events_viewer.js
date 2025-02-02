@@ -1,70 +1,40 @@
 import CInputsEventsSettings from "../components/elm-events-settings/inputs";
-import ElmHeader from "../packages/bef-client-rjs-0.1.1/elements/elm_header";
-import ElmSettings from "../packages/bef-client-rjs-0.1.1/elements/elm_settings";
+import ElmContentSwitcher from "./elm_content_switcher";
 
-export default class ElmEventsViewer extends HTMLElement {
+export default class ElmEventsViewer extends ElmContentSwitcher {
   constructor() {
     super();
-
-    this._hEventsSettingsBtnClick1 = e => (
-      this.eventsSettingsBtnClick1(e.detail.value)
-    );
-
-    this._hCategoryClick = () => {
-      return this.categoryClick()
-    };
-
-    this._userId = this.getAttribute("user-id");
-    this.initElm()
+    this._hEventsSettingsBtnClick1 = e => this.buttonClick(e.detail.value)
   };
 
   connectedCallback() {
-    Events.connect(
-      "#app",
-      CInputsEventsSettings.ENVS.btnClick1,
-      this._hEventsSettingsBtnClick1
-    );
+    super.connectedCallback();
 
     return Events.connect(
       "#app",
-      ElmSettings.ENVS.categoryClick,
-      this._hCategoryClick
+      CInputsEventsSettings.ENVS.btnClick1,
+      this._hEventsSettingsBtnClick1
     )
   };
 
   disconnectedCallback() {
-    Events.disconnect(
-      "#app",
-      CInputsEventsSettings.ENVS.btnClick1,
-      this._hEventsSettingsBtnClick1
-    );
+    super.disconnectedCallback();
 
     return Events.disconnect(
       "#app",
-      ElmSettings.ENVS.categoryClick,
-      this._hCategoryClick
+      CInputsEventsSettings.ENVS.btnClick1,
+      this._hEventsSettingsBtnClick1
     )
   };
 
-  eventsSettingsBtnClick1(eventId) {
-    this._isSwitched = true;
+  buttonClick(eventId) {
+    super.buttonClick(eventId);
     return this.innerHTML = `${`\n    <elm-event-settings user-id='${this._userId}' event-id='${eventId}'></elm-event-settings>\n    `}`
   };
 
-  categoryClick() {
-    if (URLParams.getIndex("sc-index") === 0) {
-      return this.initElm()
-    } else {
-      this._isSwitched = false;
-      return this._isSwitched
-    }
-  };
-
   initElm() {
-    this._isSwitched = false;
+    super.initElm();
     let template = `${`\n    <elm-events-settings user-id='${this._userId}'></elm-events-settings>\n    `}`;
     return this.innerHTML = template
   }
-};
-
-ElmEventsViewer.ENVS = {goBack: "eesv-gb-0"}
+}

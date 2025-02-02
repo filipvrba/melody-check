@@ -28,7 +28,12 @@ export default class Settings
         index: 'events',
         name: 'Události',
         content: "<elm-events-viewer user-id='#{user_id}'></elm-events-viewer>"
-      }, *Settings.get_categories(user_id).slice(1)]
+      },
+      {
+        index: 'templates',
+        name: 'Šablony',
+        content: "<elm-emails-viewer user-id='#{user_id}'></elm-emails-viewer>"
+      }, Settings.get_categories(user_id).last]
     end
   end
 end

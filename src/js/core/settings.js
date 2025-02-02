@@ -35,7 +35,13 @@ export default class Settings {
           content: `<elm-events-viewer user-id='${userId}'></elm-events-viewer>`
         },
 
-        ...Settings.getCategories(userId).slice(1)
+        {
+          index: "templates",
+          name: "Šablony",
+          content: `<elm-emails-viewer user-id='${userId}'></elm-emails-viewer>`
+        },
+
+        Settings.getCategories(userId)[Settings.getCategories(userId).length - 1]
       ]
     }
   }

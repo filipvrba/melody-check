@@ -2,7 +2,7 @@ export default class CContents
   def initialize(parent)
     @parent = parent
 
-    @list_container = @parent.query_selector('#eventsSettingsListContainer') 
+    @list_container = @parent.query_selector('#eventsSettingsListContainer')
   end
 
   def update_list_container()
@@ -10,7 +10,7 @@ export default class CContents
       elm_lis = []
 
       event_details.each do |event|
-        date = Date(event.date).new.to_locale_date_string("cs-CZ") 
+        date = Date(event.date).new.to_locale_date_string("cs-CZ")
 
         template = """
 <li class='list-group-item d-flex justify-content-between align-items-center'>

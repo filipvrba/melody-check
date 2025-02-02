@@ -13,15 +13,20 @@ export default class ElmEmailSettings < HTMLElement
     @h_btn_click_0    = lambda do |e|
       btn_click_0(e.detail.value)
     end
-    @h_event_callback = lambda {|e| event_callback(e.detail.value)}
+    @h_event_callback = lambda {|e| event_callback(e.detail.value) if !@no_fetch }
 
-    @event_id = nil
+    @event_id = self.get_attribute('event-id')
+    @no_fetch = self.get_attribute('no-fetch') == ''
     
     init_elm()
 
     @c_spinner  = CSpinner.new(self)
     @c_inputs   = CInputs.new(self)
     @c_database = CDatabase.new(self)
+
+    if @no_fetch
+      event_callback(@event_id)
+    end
   end
 
   def connected_callback()
@@ -36,6 +41,8 @@ export default class ElmEmailSettings < HTMLElement
 
   def event_callback(event_id)
     @event_id = event_id
+
+    puts event_id
 
     if @event_id
       @c_inputs.set_disable_btn(false)

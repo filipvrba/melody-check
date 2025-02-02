@@ -39,4 +39,19 @@ window.customElements.define(
 );
 
 import ElmEventsViewer from "./elements/elm_events_viewer";
-window.customElements.define("elm-events-viewer", ElmEventsViewer)
+window.customElements.define("elm-events-viewer", ElmEventsViewer);
+import ElmEmailsSettings from "./elements/elm_emails_settings";
+
+window.customElements.define(
+  "elm-emails-settings",
+  ElmEmailsSettings
+);
+
+import ElmEmailsViewer from "./elements/elm_emails_viewer";
+window.customElements.define("elm-emails-viewer", ElmEmailsViewer);
+import ElmContentSwitcher from "./elements/elm_content_switcher";
+
+window.customElements.define(
+  "elm-content-switcher",
+  ElmContentSwitcher
+)

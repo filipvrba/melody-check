@@ -19,12 +19,18 @@ export default class ElmEmailSettings extends HTMLElement {
   constructor() {
     super();
     this._hBtnClick0 = e => this.btnClick0(e.detail.value);
-    this._hEventCallback = e => this.eventCallback(e.detail.value);
-    this._eventId = null;
+
+    this._hEventCallback = (e) => {
+      if (!this._noFetch) return this.eventCallback(e.detail.value)
+    };
+
+    this._eventId = this.getAttribute("event-id");
+    this._noFetch = this.getAttribute("no-fetch") === "";
     this.initElm();
     this._cSpinner = new CSpinner(this);
     this._cInputs = new CInputs(this);
-    this._cDatabase = new CDatabase(this)
+    this._cDatabase = new CDatabase(this);
+    if (this._noFetch) this.eventCallback(this._eventId)
   };
 
   connectedCallback() {
@@ -49,6 +55,7 @@ export default class ElmEmailSettings extends HTMLElement {
 
   eventCallback(eventId) {
     this._eventId = eventId;
+    console.log(eventId);
 
     if (this._eventId) {
       this._cInputs.setDisableBtn(false);
