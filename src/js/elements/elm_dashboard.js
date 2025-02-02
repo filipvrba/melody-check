@@ -1,6 +1,7 @@
 import AProtected from "../packages/bef-client-rjs-0.1.1/elements/abstracts/protected";
 import CTimer from "../packages/bef-client-rjs-0.1.1/components/timer";
 import CDatabase from "../components/elm-dashboard/database";
+import CSpinner from "../packages/template-rjs-0.1.1/components/spinner";
 
 export default class ElmDashboard extends AProtected {
   get userId() {
@@ -20,14 +21,18 @@ export default class ElmDashboard extends AProtected {
   };
 
   protectedCallback() {
-    this._cDatabase.getEventId((eventId) => {
-      this._eventId = eventId;
-      return this.updateContentContainer()
-    });
-
     this.initElm();
     this._dashboardContainer = this.querySelector("#dashboardContainer");
-    return this._dashboardContainer
+    this._cSpinner = new CSpinner(this);
+    return this.fetchAndUpdateEvent()
+  };
+
+  fetchAndUpdateEvent() {
+    return this._cDatabase.getEventId((eventId) => {
+      this._cSpinner.setDisplay(false);
+      this._eventId = eventId;
+      return this.updateContentContainer()
+    })
   };
 
   connectedCallback() {
@@ -42,7 +47,12 @@ export default class ElmDashboard extends AProtected {
     let template = null;
 
     if (this._eventId) {
-      template = `<elm-dashboard-candidates event-id='${this._eventId}'></elm-dashboard-candidates>`
+      template = `${`
+      <div class='container my-5'>
+        <h1 class='text-center mb-4'>Účastníci</h1>
+        <elm-dashboard-candidates event-id='${this._eventId}'></elm-dashboard-candidates>
+      </div>
+      `}`
     } else {
       template = "<elm-dashboard-information></elm-dashboard-information>"
     };
@@ -51,7 +61,11 @@ export default class ElmDashboard extends AProtected {
   };
 
   initElm() {
-    let template = `${`\n    <elm-header user-id='${this._userId}'></elm-header>\n    <div id='dashboardContainer'></div>\n    `}`;
+    let template = `${`
+    <elm-spinner id='spinnerOne' class='spinner-overlay'></elm-spinner>
+    <elm-header user-id='${this._userId}'></elm-header>
+    <div id='dashboardContainer'></div>
+    `}`;
     return this.innerHTML = template
   }
 }

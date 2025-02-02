@@ -7,11 +7,18 @@ export default class CDatabase {
 
   getEventDetails(callback) {
     let query = `SELECT id, event_name, event_date FROM events WHERE user_id = ${this._parent.userId} ORDER BY created_at ASC;`;
-    this._parent.cSpinner.setDisplayWithId(true, "#spinnerOne");
+
+    if (this._parent.cSpinner) {
+      this._parent.cSpinner.setDisplayWithId(true, "#spinnerOne")
+    };
 
     return Net.bef(query, (rows) => {
       let decodeRows;
-      this._parent.cSpinner.setDisplayWithId(false, "#spinnerOne");
+
+      if (this._parent.cSpinner) {
+        this._parent.cSpinner.setDisplayWithId(false, "#spinnerOne")
+      };
+
       let haveEvent = rows.length > 0;
 
       if (haveEvent) {

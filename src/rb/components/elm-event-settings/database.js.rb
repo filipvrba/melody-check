@@ -9,9 +9,9 @@ export default class CDatabase
     query = "SELECT id, event_name, event_date FROM events " +
             "WHERE user_id = #{@parent.user_id} ORDER BY created_at ASC;"
 
-    @parent.c_spinner.set_display_with_id(true, '#spinnerOne')
+    @parent.c_spinner.set_display_with_id(true, '#spinnerOne') if @parent.c_spinner
     Net.bef(query) do |rows|
-      @parent.c_spinner.set_display_with_id(false, '#spinnerOne')
+      @parent.c_spinner.set_display_with_id(false, '#spinnerOne') if @parent.c_spinner
 
       have_event = rows.length > 0
       if have_event

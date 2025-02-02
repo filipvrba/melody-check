@@ -55,7 +55,6 @@ export default class ElmEmailSettings extends HTMLElement {
 
   eventCallback(eventId) {
     this._eventId = eventId;
-    console.log(eventId);
 
     if (this._eventId) {
       this._cInputs.setDisableBtn(false);

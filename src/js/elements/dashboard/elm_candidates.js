@@ -65,30 +65,26 @@ export default class ElmDashboardCandidates extends HTMLElement {
 
   initElm() {
     let template = `${`
-<div class='container my-5'>
-  <h1 class='text-center mb-4'>Účastníci</h1>
-
-  <!-- Tabulka kandidátů -->
-  <div class='table-responsive rounded shadow'>
-    <table class='table table-striped table-hover align-middle mb-0'>
-      <thead class='table-dark'>
-        <tr>
-          <th scope='col'>#</th>
-          <th scope='col'>Celé Jméno</th>
-          <th scope='col'>Email</th>
-          <th scope='col' class='text-center'>Potvrzená Účast</th>
-        </tr>
-      </thead>
-      <tbody id='dashboardCandidatesListBody'>
-        <tr>
-          <th scope='row'></th>
-          <td class='text-center'>---</td>
-          <td class='text-center'>načítání</td>
-          <td class='text-center'>---</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<!-- Tabulka kandidátů -->
+<div class='table-responsive rounded shadow'>
+  <table class='table table-striped table-hover align-middle mb-0'>
+    <thead class='table-dark'>
+      <tr>
+        <th scope='col'>#</th>
+        <th scope='col'>Celé Jméno</th>
+        <th scope='col'>Email</th>
+        <th scope='col' class='text-center'>Potvrzená Účast</th>
+      </tr>
+    </thead>
+    <tbody id='dashboardCandidatesListBody'>
+      <tr>
+        <th scope='row'></th>
+        <td class='text-center'>---</td>
+        <td class='text-center'>načítání</td>
+        <td class='text-center'>---</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
     `}`;
     return this.innerHTML = template

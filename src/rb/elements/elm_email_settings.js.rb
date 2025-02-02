@@ -42,8 +42,6 @@ export default class ElmEmailSettings < HTMLElement
   def event_callback(event_id)
     @event_id = event_id
 
-    puts event_id
-
     if @event_id
       @c_inputs.set_disable_btn(false)
 

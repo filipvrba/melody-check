@@ -9,10 +9,12 @@ export default class CContents
     @parent.c_database.get_event_details() do |event_details|
       elm_lis = []
 
-      event_details.each do |event|
-        date = Date(event.date).new.to_locale_date_string("cs-CZ")
+      if event_details
 
-        template = """
+        event_details.each do |event|
+          date = Date(event.date).new.to_locale_date_string("cs-CZ")
+
+          template = """
 <li class='list-group-item d-flex justify-content-between align-items-center'>
   <span style='cursor: pointer;' onclick='eventsSettingsListInputEditBtnClick(#{event.id})'>
     <h5 class='card-title mb-0'><ins>#{event.name}</ins></h5>
@@ -22,8 +24,9 @@ export default class CContents
     <i class='bi bi-trash'></i>
   </button>
 </li>
-        """
-        elm_lis.push(template)
+          """
+          elm_lis.push(template)
+        end
       end
 
       @list_container.innerHTML = elm_lis.join('')

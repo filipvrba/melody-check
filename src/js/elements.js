@@ -54,4 +54,11 @@ import ElmContentSwitcher from "./elements/elm_content_switcher";
 window.customElements.define(
   "elm-content-switcher",
   ElmContentSwitcher
+);
+
+import ElmUserTypeDashboard from "./elements/elm_user_type_dashboard";
+
+window.customElements.define(
+  "elm-user-type-dashboard",
+  ElmUserTypeDashboard
 )
