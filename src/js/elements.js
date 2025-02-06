@@ -64,4 +64,10 @@ window.customElements.define(
 );
 
 import ElmRejection from "./elements/elm_rejection";
-window.customElements.define("elm-rejection", ElmRejection)
+window.customElements.define("elm-rejection", ElmRejection);
+import ElmEventCandidates from "./elements/elm_event_candidates";
+
+window.customElements.define(
+  "elm-event-candidates",
+  ElmEventCandidates
+)

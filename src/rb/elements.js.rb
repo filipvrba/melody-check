@@ -46,3 +46,6 @@ window.custom_elements.define('elm-user-type-dashboard', ElmUserTypeDashboard)
 
 import 'ElmRejection', './elements/elm_rejection'
 window.custom_elements.define('elm-rejection', ElmRejection)
+
+import 'ElmEventCandidates', './elements/elm_event_candidates'
+window.custom_elements.define('elm-event-candidates', ElmEventCandidates)

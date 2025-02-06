@@ -5,6 +5,7 @@ import nointernetHTML from "../../html/nointernet.html?raw";
 import confirmHTML from "../../html/confirm.html?raw";
 import rejectionHTML from "../../html/rejection.html?raw";
 import eventSignupHTML from "../../html/event_signup.html?raw";
+import eventCandidatesHTML from "../../html/event_candidates.html?raw";
 import introductionHTML from "../../html/introduction.html?raw";
 import signinHTML from "../../html/signin.html?raw";
 import signupHTML from "../../html/signup.html?raw";
@@ -17,6 +18,7 @@ window.PAGES = {
   confirm: confirmHTML,
   rejection: rejectionHTML,
   "event/signup": eventSignupHTML,
+  "event/candidates": eventCandidatesHTML,
   introduction: introductionHTML,
   signin: signinHTML,
   signup: signupHTML,

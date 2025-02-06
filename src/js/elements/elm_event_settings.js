@@ -162,9 +162,14 @@ export default class ElmEventSettings extends HTMLElement {
       <div class='d-flex justify-content-between align-items-center'>
         <h5 class='card-title'>Účastníci</h5>
       
-        <button type='button' class='btn btn-outline-primary btn-sm' onclick='eventSettingsListBtnFormClick()'>
-          <i class='bi bi-box-arrow-up-right'></i> Formulář
-        </button>
+        <div>
+          <button type='button' class='btn btn-outline-primary btn-sm' onclick='eventSettingsListBtnShareClick()'>
+            <i class='bi bi-box-arrow-up-right'></i> Sdílet
+          </button>
+          <button type='button' class='btn btn-outline-primary btn-sm' onclick='eventSettingsListBtnFormClick()'>
+            <i class='bi bi-box-arrow-up-right'></i> Formulář
+          </button>
+        </div>
       </div>
       
 

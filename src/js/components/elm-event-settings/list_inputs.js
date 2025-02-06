@@ -15,7 +15,8 @@ export default class CListInputs {
     this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
     window.eventSettingsListAddBtnClick = this.addBtnClick.bind(this);
     window.eventSettingsListRemoveBtnClick = this.removeBtnClick.bind(this);
-    window.eventSettingsListBtnFormClick = this.btnFormClick.bind(this)
+    window.eventSettingsListBtnFormClick = this.btnFormClick.bind(this);
+    window.eventSettingsListBtnShareClick = this.btnShareClick.bind(this)
   };
 
   connectedCallback() {
@@ -73,6 +74,13 @@ export default class CListInputs {
   btnFormClick() {
     return window.open(
       `/?event_id=${this._parent.eventId}#event-signup`,
+      "_blank"
+    )
+  };
+
+  btnShareClick() {
+    return window.open(
+      `/?event_id=${this._parent.eventId}#event-candidates`,
       "_blank"
     )
   };

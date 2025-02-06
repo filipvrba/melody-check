@@ -17,6 +17,7 @@ export default class CListInputs
     window.event_settings_list_add_btn_click    = add_btn_click
     window.event_settings_list_remove_btn_click = remove_btn_click
     window.event_settings_list_btn_form_click   = btn_form_click
+    window.event_settings_list_btn_share_click  = btn_share_click
   end
 
   def connected_callback()
@@ -60,6 +61,10 @@ export default class CListInputs
 
   def btn_form_click()
     window.open("/?event_id=#{@parent.event_id}#event-signup", '_blank')
+  end
+
+  def btn_share_click()
+    window.open("/?event_id=#{@parent.event_id}#event-candidates", '_blank')
   end
 
   def input_full_name_keypress()

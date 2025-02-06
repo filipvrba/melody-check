@@ -21,6 +21,10 @@
       "priority": -1
     },
     {
+      "endpoint": "event/candidates",
+      "priority": -1
+    },
+    {
       "endpoint": "introduction",
       "priority": 10
     },
