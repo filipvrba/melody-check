@@ -9,6 +9,7 @@ export default class ElmDashboardCandidates extends HTMLElement {
     super();
     this._hUpdateDelay = e => this.updateDelay(e.detail.value);
     this._eventId = this.getAttribute("event-id");
+    this._noEmails = this.getAttribute("no-emails") === "";
     this.initElm();
     this._listBody = this.querySelector("#dashboardCandidatesListBody");
     this._cDatabase = new CDatabase(this)
@@ -48,11 +49,12 @@ export default class ElmDashboardCandidates extends HTMLElement {
       if (haveCandidates) {
         for (let candidate of candidates) {
           let icon = this.getConfirmIconElement(candidate.confirmedAttendance);
+          let tdEmail = this._noEmails ? "<td></td>" : `<td>${candidate.email}</td>`;
           let template = `${`
           <tr>
             <th scope='row'>${candidate.id}</th>
             <td>${candidate.fullName}</td>
-            <td>${candidate.email}</td>
+            ${tdEmail}
             <td class='text-center'>
               ${icon}
             </td>
@@ -76,6 +78,7 @@ export default class ElmDashboardCandidates extends HTMLElement {
   };
 
   initElm() {
+    let thEmail = this._noEmails ? "<th scope='col'></th>" : "<th scope='col'>Email</th>";
     let template = `${`
 <!-- Tabulka kandidátů -->
 <div class='table-responsive rounded shadow'>
@@ -84,7 +87,7 @@ export default class ElmDashboardCandidates extends HTMLElement {
       <tr>
         <th scope='col'>#</th>
         <th scope='col'>Celé Jméno</th>
-        <th scope='col'>Email</th>
+        ${thEmail}
         <th scope='col' class='text-center'>Potvrzená Účast</th>
       </tr>
     </thead>

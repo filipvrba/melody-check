@@ -16,10 +16,10 @@ export default class CContents {
 
   getPageCandidates(eventName) {
     return `${`
-<div class='container my-5'>
+<div class='container col-lg-8 my-5'>
   <h1 class='text-center mb-4'>${eventName}</h1>
   <h2 class='text-center mb-3'>Účastnící</h2>
-  <elm-dashboard-candidates event-id='${this._parent.eventId}'></elm-dashboard-candidates>
+  <elm-dashboard-candidates event-id='${this._parent.eventId}' no-emails></elm-dashboard-candidates>
 </div>
     `}`
   }

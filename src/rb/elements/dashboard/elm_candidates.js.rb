@@ -8,7 +8,8 @@ export default class ElmDashboardCandidates < HTMLElement
     
     @h_update_delay = lambda {|e| update_delay(e.detail.value) }
 
-    @event_id = self.get_attribute('event-id')
+    @event_id  = self.get_attribute('event-id')
+    @no_emails = self.get_attribute('no-emails') == ''
 
     init_elm()
 
@@ -50,12 +51,13 @@ export default class ElmDashboardCandidates < HTMLElement
       if have_candidates
         candidates.each do |candidate|
           icon = get_confirm_icon_element(candidate.confirmed_attendance)
+          td_email = @no_emails ? '<td></td>' : "<td>#{candidate.email}</td>"
 
           template = """
           <tr>
             <th scope='row'>#{candidate.id}</th>
             <td>#{candidate.full_name}</td>
-            <td>#{candidate.email}</td>
+            #{td_email}
             <td class='text-center'>
               #{icon}
             </td>
@@ -80,6 +82,8 @@ export default class ElmDashboardCandidates < HTMLElement
   end
 
   def init_elm()
+    th_email = @no_emails ? "<th scope='col'></th>" : "<th scope='col'>Email</th>"
+
     template = """
 <!-- Tabulka kandidátů -->
 <div class='table-responsive rounded shadow'>
@@ -88,7 +92,7 @@ export default class ElmDashboardCandidates < HTMLElement
       <tr>
         <th scope='col'>#</th>
         <th scope='col'>Celé Jméno</th>
-        <th scope='col'>Email</th>
+        #{th_email}
         <th scope='col' class='text-center'>Potvrzená Účast</th>
       </tr>
     </thead>
