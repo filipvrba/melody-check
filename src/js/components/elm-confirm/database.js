@@ -22,7 +22,7 @@ WHERE
       let decodeInformations = rows.map(h => ({
         eventName: h.event_name.decodeBase64(),
         fullName: h.full_name.decodeBase64(),
-        confirmedAttendance: h.confirmed_attendance === "1"
+        confirmedAttendance: parseInt(h.confirmed_attendance)
       }));
 
       let haveInformations = decodeInformations.length > 0;
@@ -35,8 +35,8 @@ WHERE
     })
   };
 
-  updateConfirmedAttendance(callback) {
-    let query = `UPDATE candidates SET confirmed_attendance = 1 WHERE id = ${this._parent.candidateId} AND event_id = ${this._parent.eventId};`;
+  updateConfirmedAttendance(confirmedAttendance, callback) {
+    let query = `UPDATE candidates SET confirmed_attendance = ${confirmedAttendance} WHERE id = ${this._parent.candidateId} AND event_id = ${this._parent.eventId};`;
 
     return Net.bef(query, (message) => {
       if (callback) return callback(message)

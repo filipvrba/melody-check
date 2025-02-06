@@ -61,4 +61,7 @@ import ElmUserTypeDashboard from "./elements/elm_user_type_dashboard";
 window.customElements.define(
   "elm-user-type-dashboard",
   ElmUserTypeDashboard
-)
+);
+
+import ElmRejection from "./elements/elm_rejection";
+window.customElements.define("elm-rejection", ElmRejection)

@@ -3,6 +3,7 @@ window.ROUTES_JSON = routesObj;
 import errorHTML from "../../html/error.html?raw";
 import nointernetHTML from "../../html/nointernet.html?raw";
 import confirmHTML from "../../html/confirm.html?raw";
+import rejectionHTML from "../../html/rejection.html?raw";
 import eventSignupHTML from "../../html/event_signup.html?raw";
 import introductionHTML from "../../html/introduction.html?raw";
 import signinHTML from "../../html/signin.html?raw";
@@ -14,6 +15,7 @@ window.PAGES = {
   error: errorHTML,
   nointernet: nointernetHTML,
   confirm: confirmHTML,
+  rejection: rejectionHTML,
   "event/signup": eventSignupHTML,
   introduction: introductionHTML,
   signin: signinHTML,

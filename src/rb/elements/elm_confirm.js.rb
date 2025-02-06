@@ -20,8 +20,8 @@ export default class ElmConfirm < HTMLElement
       @c_database.get_informations() do |informations|
 
         if informations
-          unless informations.confirmed_attendance
-            @c_database.update_confirmed_attendance() do
+          unless informations.confirmed_attendance == 1
+            @c_database.update_confirmed_attendance(1) do
               self.innerHTML = @c_contents.confirm_content(informations.full_name, informations.event_name)
             end
           else

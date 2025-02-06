@@ -31,6 +31,17 @@ export default class ElmDashboardCandidates < HTMLElement
     update_list_body() if is_connected
   end
 
+  def get_confirm_icon_element(confirmed_attendance)
+    case confirmed_attendance.to_i
+    when 0
+      return "<i class='bi bi-hourglass-split text-warning'></i>"
+    when 1 
+      return "<i class='bi bi-check-circle-fill text-success'></i>"
+    when 2
+      return "<i class='bi bi-x-circle-fill text-danger'></i>"
+    end
+  end
+
   def update_list_body()
     @c_database.get_candidates() do |candidates|
       elements = []
@@ -38,15 +49,15 @@ export default class ElmDashboardCandidates < HTMLElement
       
       if have_candidates
         candidates.each do |candidate|
-          template_check = "<i class='bi bi-check-circle-fill text-success'></i>"
-          template_x     = "<i class='bi bi-x-circle-fill text-danger'></i>"
+          icon = get_confirm_icon_element(candidate.confirmed_attendance)
+
           template = """
           <tr>
             <th scope='row'>#{candidate.id}</th>
             <td>#{candidate.full_name}</td>
             <td>#{candidate.email}</td>
             <td class='text-center'>
-              #{candidate.confirmed_attendance ? template_check : template_x}
+              #{icon}
             </td>
           </tr>
           """

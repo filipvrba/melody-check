@@ -13,7 +13,7 @@ export default class CDatabase {
         id: h.id,
         fullName: h.full_name.decodeBase64(),
         email: h.email.decodeBase64(),
-        confirmedAttendance: h.confirmed_attendance === "1"
+        confirmedAttendance: h.confirmed_attendance
       }));
 
       if (callback) return callback(decodeCandidates)

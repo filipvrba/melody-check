@@ -19,10 +19,10 @@ WHERE
 "
     Net.bef(query) do |rows|
       decode_informations = rows.map do |h|
-        return{
+        return {
           event_name:           h['event_name'].decode_base64(),
           full_name:            h['full_name'].decode_base64(),
-          confirmed_attendance: h['confirmed_attendance'] == '1',
+          confirmed_attendance: h['confirmed_attendance'].to_i,
         }
       end
 
@@ -35,8 +35,8 @@ WHERE
     end
   end
 
-  def update_confirmed_attendance(&callback)
-    query = "UPDATE candidates SET confirmed_attendance = 1 " +
+  def update_confirmed_attendance(confirmed_attendance, &callback)
+    query = "UPDATE candidates SET confirmed_attendance = #{confirmed_attendance} " +
             "WHERE id = #{@parent.candidate_id} AND event_id = #{@parent.event_id};"
 
     Net.bef(query) do |message|

@@ -27,6 +27,19 @@ export default class ElmDashboardCandidates extends HTMLElement {
     if (isConnected) return this.updateListBody()
   };
 
+  getConfirmIconElement(confirmedAttendance) {
+    switch (parseInt(confirmedAttendance)) {
+    case 0:
+      return "<i class='bi bi-hourglass-split text-warning'></i>";
+
+    case 1:
+      return "<i class='bi bi-check-circle-fill text-success'></i>";
+
+    case 2:
+      return "<i class='bi bi-x-circle-fill text-danger'></i>"
+    }
+  };
+
   updateListBody() {
     return this._cDatabase.getCandidates((candidates) => {
       let elements = [];
@@ -34,15 +47,14 @@ export default class ElmDashboardCandidates extends HTMLElement {
 
       if (haveCandidates) {
         for (let candidate of candidates) {
-          let templateCheck = "<i class='bi bi-check-circle-fill text-success'></i>";
-          let templateX = "<i class='bi bi-x-circle-fill text-danger'></i>";
+          let icon = this.getConfirmIconElement(candidate.confirmedAttendance);
           let template = `${`
           <tr>
             <th scope='row'>${candidate.id}</th>
             <td>${candidate.fullName}</td>
             <td>${candidate.email}</td>
             <td class='text-center'>
-              ${candidate.confirmedAttendance ? templateCheck : templateX}
+              ${icon}
             </td>
           </tr>
           `}`;

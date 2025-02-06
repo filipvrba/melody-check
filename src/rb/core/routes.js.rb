@@ -5,6 +5,7 @@ window.ROUTES_JSON = routes_obj
 import 'errorHTML', '../../html/error.html?raw'
 import 'nointernetHTML', '../../html/nointernet.html?raw'
 import 'confirmHTML', '../../html/confirm.html?raw'
+import 'rejectionHTML', '../../html/rejection.html?raw'
 import 'eventSignupHTML', '../../html/event_signup.html?raw'
 import 'introductionHTML', '../../html/introduction.html?raw'
 import 'signinHTML', '../../html/signin.html?raw'
@@ -16,6 +17,7 @@ window.PAGES = {
   error:          errorHTML,
   nointernet:     nointernetHTML,
   confirm:        confirmHTML,
+  rejection:      rejectionHTML,
   'event/signup': event_signupHTML,
   introduction:   introductionHTML,
   signin:         signinHTML,

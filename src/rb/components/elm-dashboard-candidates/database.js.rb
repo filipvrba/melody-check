@@ -15,7 +15,7 @@ export default class CDatabase
           id:                   h.id,
           full_name:            h['full_name'].decode_base64(),
           email:                h.email.decode_base64(),
-          confirmed_attendance: h['confirmed_attendance'] == '1',
+          confirmed_attendance: h['confirmed_attendance'],
         }
       end
       callback(decode_candidates) if callback

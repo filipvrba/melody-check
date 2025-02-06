@@ -25,10 +25,10 @@ export default class ElmConfirm extends HTMLElement {
     if (this._haveParams) {
       this._cDatabase.getInformations((informations) => {
         if (informations) {
-          return informations.confirmedAttendance ? this.innerHTML = this._cContents.confirmAgainContent(
+          return informations.confirmedAttendance === 1 ? this.innerHTML = this._cContents.confirmAgainContent(
             informations.fullName,
             informations.eventName
-          ) : this._cDatabase.updateConfirmedAttendance(() => (
+          ) : this._cDatabase.updateConfirmedAttendance(1, () => (
             this.innerHTML = this._cContents.confirmContent(
               informations.fullName,
               informations.eventName

@@ -43,3 +43,6 @@ window.custom_elements.define('elm-content-switcher', ElmContentSwitcher)
 
 import 'ElmUserTypeDashboard', './elements/elm_user_type_dashboard'
 window.custom_elements.define('elm-user-type-dashboard', ElmUserTypeDashboard)
+
+import 'ElmRejection', './elements/elm_rejection'
+window.custom_elements.define('elm-rejection', ElmRejection)

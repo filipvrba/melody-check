@@ -4,6 +4,7 @@
       "error": "Chyba",
       "nointernet": "Bez internetu",
       "confirm": "Potvrzení",
+      "rejection": "Zamítnutí",
       "event/signup": "Registrace na událost",
       "introduction": "Úvod",
       "signin": "Přihlásit se",
