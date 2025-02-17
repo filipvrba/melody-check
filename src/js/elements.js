@@ -77,4 +77,7 @@ import ElmEventSettingsModal from "./elements/elm_event_settings_modal";
 window.customElements.define(
   "elm-event-settings-modal",
   ElmEventSettingsModal
-)
+);
+
+import ElmConfirmDate from "./elements/elm_confirm_date";
+window.customElements.define("elm-confirm-date", ElmConfirmDate)

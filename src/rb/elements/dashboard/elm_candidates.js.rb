@@ -51,12 +51,14 @@ export default class ElmDashboardCandidates < HTMLElement
       if have_candidates
         candidates.each do |candidate|
           icon = get_confirm_icon_element(candidate.confirmed_attendance)
-          td_email = @no_emails ? '<td></td>' : "<td>#{candidate.email}</td>"
+          td_email   = @no_emails ? '<td></td>' : "<td>#{candidate.email}</td>"
+          td_arrival = @no_emails ? '<td></td>' : "<td>#{candidate.arrival_times.join(' / ')}</td>"
 
           template = """
           <tr>
             <th scope='row'>#{candidate.id}</th>
             <td>#{candidate.full_name}</td>
+            #{td_arrival}
             #{td_email}
             <td class='text-center'>
               #{icon}
@@ -82,7 +84,8 @@ export default class ElmDashboardCandidates < HTMLElement
   end
 
   def init_elm()
-    th_email = @no_emails ? "<th scope='col'></th>" : "<th scope='col'>Email</th>"
+    th_email   = @no_emails ? "<th scope='col'></th>" : "<th scope='col'>Email</th>"
+    th_arrival = @no_emails ? "<th scope='col'></th>" : "<th scope='col'>Příchod</th>"
 
     template = """
 <!-- Tabulka kandidátů -->
@@ -92,6 +95,7 @@ export default class ElmDashboardCandidates < HTMLElement
       <tr>
         <th scope='col'>#</th>
         <th scope='col'>Celé Jméno</th>
+        #{th_arrival}
         #{th_email}
         <th scope='col' class='text-center'>Potvrzená Účast</th>
       </tr>

@@ -52,3 +52,6 @@ window.custom_elements.define('elm-event-candidates', ElmEventCandidates)
 
 import 'ElmEventSettingsModal', './elements/elm_event_settings_modal'
 window.custom_elements.define('elm-event-settings-modal', ElmEventSettingsModal)
+
+import 'ElmConfirmDate', './elements/elm_confirm_date'
+window.custom_elements.define('elm-confirm-date', ElmConfirmDate)

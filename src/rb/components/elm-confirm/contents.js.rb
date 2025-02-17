@@ -37,7 +37,7 @@ export default class CContents
       </div>
       
       <h5 class='text-center'>Děkujeme za potvrzení!</h5>
-      <p class='text-center'>Vaše účast na následujícím eventu byla potvrzena:</p>
+      <p class='text-center'>Pokud chcete upřesnit čas příchodu, vyplňte níže datum a čas.</p>
 
       <div class='row'>
         <div class='col-12 text-center'>
@@ -45,6 +45,8 @@ export default class CContents
           <p><strong>Název eventu:</strong> <span id='eventName'>#{event_name}</span></p>
         </div>
       </div>
+
+      <elm-confirm-date></elm-confirm-date>
     </div>
   </div>
 </div>
@@ -64,7 +66,7 @@ export default class CContents
       </div>
       
       <h5 class='text-center'>Vaše účast na následujícím eventu byla již potvrzena!</h5>
-      <p class='text-center'>Není nutné potvrzovat účast znovu.</p>
+      <p class='text-center'>Pokud chcete upřesnit čas příchodu, vyplňte níže datum a čas.</p>
 
       <div class='row'>
         <div class='col-12 text-center'>
@@ -72,6 +74,8 @@ export default class CContents
           <p><strong>Název eventu:</strong> <span id='eventName'>#{event_name}</span></p>
         </div>
       </div>
+
+      <elm-confirm-date></elm-confirm-date>
     </div>
   </div>
 </div>

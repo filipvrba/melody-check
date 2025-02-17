@@ -2,7 +2,6 @@ import CEventInputs from "../components/elm-event-settings/event_inputs";
 import CListInputs from "../components/elm-event-settings/list_inputs";
 import CDatabase from "../components/elm-event-settings/database";
 import CContents from "../components/elm-event-settings/contents";
-import CModal from "../components/elm-event-settings/modal";
 import CSpinner from "../packages/template-rjs-0.1.1/components/spinner";
 import ElmEventSettingsModal from "./elm_event_settings_modal";
 
@@ -53,7 +52,6 @@ export default class ElmEventSettings extends HTMLElement {
     this._cEventInputs = new CEventInputs(this);
     this._cListInputs = new CListInputs(this);
     this._cContents = new CContents(this);
-    this._cModal = new CModal(this);
     this._cEventInputs.updateEventDetails(this._eventId)
   };
 
