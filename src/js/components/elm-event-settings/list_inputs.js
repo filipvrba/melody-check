@@ -10,13 +10,17 @@ export default class CListInputs {
       return this.inputEmailKeypress()
     };
 
+    this._hInputFileChange = e => this.inputFileChange(e);
     this._inputFullName = this._parent.querySelector("#eventSettingsListInputFullname");
     this._inputEmail = this._parent.querySelector("#eventSettingsListInputEmail");
+    this._inputFile = this._parent.querySelector("#eventSettingsListCandidatesFileInput");
     this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
     window.eventSettingsListAddBtnClick = this.addBtnClick.bind(this);
     window.eventSettingsListRemoveBtnClick = this.removeBtnClick.bind(this);
     window.eventSettingsListBtnFormClick = this.btnFormClick.bind(this);
-    window.eventSettingsListBtnShareClick = this.btnShareClick.bind(this)
+    window.eventSettingsListBtnShareClick = this.btnShareClick.bind(this);
+    window.eventSettingsListBtnImportClick = this.btnImportClick.bind(this);
+    window.eventSettingsListBtnExportClick = this.btnExportClick.bind(this)
   };
 
   connectedCallback() {
@@ -25,9 +29,14 @@ export default class CListInputs {
       this._hInputFullNameKeypress
     );
 
-    return this._inputEmail.addEventListener(
+    this._inputEmail.addEventListener(
       "keypress",
       this._hInputEmailKeypress
+    );
+
+    return this._inputFile.addEventListener(
+      "change",
+      this._hInputFileChange
     )
   };
 
@@ -37,9 +46,14 @@ export default class CListInputs {
       this._hInputFullNameKeypress
     );
 
-    return this._inputEmail.removeEventListener(
+    this._inputEmail.removeEventListener(
       "keypress",
       this._hInputEmailKeypress
+    );
+
+    return this._inputFile.removeEventListener(
+      "change",
+      this._hInputFileChange
     )
   };
 
@@ -85,6 +99,28 @@ export default class CListInputs {
     )
   };
 
+  btnImportClick() {
+    return this._inputFile.click()
+  };
+
+  btnExportClick() {
+    return this._parent.cDatabase.getCandidates((candidates) => {
+      let data = [{fullName: "", email: ""}];
+
+      if (candidates.length > 0) {
+        data = candidates.map(h => ({fullName: h.fullName, email: h.email}))
+      };
+
+      let eventTitle = this._parent.cEventInputs.inputTitle.value.toLowerCase().replaceAll(
+        /[-. ]/g,
+        "_"
+      );
+
+      let fileName = `${eventTitle}_candidates.csv`;
+      return CSVParser.downloadCsv(data, fileName)
+    })
+  };
+
   inputFullNameKeypress() {
     if (event.key !== "Enter") return;
     return this._inputEmail.focus()
@@ -93,6 +129,20 @@ export default class CListInputs {
   inputEmailKeypress() {
     if (event.key !== "Enter") return;
     return this.addBtnClick()
+  };
+
+  inputFileChange(event) {
+    let file = event.target.files[0];
+    let reader = new FileReader();
+
+    reader.onload = (e) => {
+      let csvText = e.target.result;
+      let data = CSVParser.csvToObject(csvText);
+      this._inputFile.value = "";
+      return this._parent.sendDbCandidates(data)
+    };
+
+    return reader.readAsText(file)
   };
 
   haveFullName() {

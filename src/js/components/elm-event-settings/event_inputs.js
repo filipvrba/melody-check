@@ -1,4 +1,8 @@
 export default class CEventInputs {
+  get inputTitle() {
+    return this._inputTitle
+  };
+
   constructor(parent) {
     this._parent = parent;
 

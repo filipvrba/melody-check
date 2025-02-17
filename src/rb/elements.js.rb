@@ -49,3 +49,6 @@ window.custom_elements.define('elm-rejection', ElmRejection)
 
 import 'ElmEventCandidates', './elements/elm_event_candidates'
 window.custom_elements.define('elm-event-candidates', ElmEventCandidates)
+
+import 'ElmEventSettingsModal', './elements/elm_event_settings_modal'
+window.custom_elements.define('elm-event-settings-modal', ElmEventSettingsModal)

@@ -3,6 +3,8 @@ export default class CEventInputs
     btn_click_0: 'ees-cei-btn-click-0'
   }
 
+  attr_reader :input_title
+
   def initialize(parent)
     @parent = parent
 

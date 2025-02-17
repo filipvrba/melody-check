@@ -11,7 +11,6 @@ export default class CContents
   def update_list_container()
     @parent.c_database.get_candidates() do |candidates|
       elm_lis = []
-
       candidates.each do |candidate|
         template = """
 <li class='list-group-item d-flex justify-content-between align-items-center'>

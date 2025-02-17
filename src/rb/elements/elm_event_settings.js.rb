@@ -1,15 +1,18 @@
 import 'CEventInputs', '../components/elm-event-settings/event_inputs'
-import 'CListInputs', '../components/elm-event-settings/list_inputs'
-import 'CDatabase', '../components/elm-event-settings/database'
-import 'CContents', '../components/elm-event-settings/contents'
+import 'CListInputs',  '../components/elm-event-settings/list_inputs'
+import 'CDatabase',    '../components/elm-event-settings/database'
+import 'CContents',    '../components/elm-event-settings/contents'
+import 'CModal',       '../components/elm-event-settings/modal'
+
 import 'CSpinner', '../packages/template-rjs-0.1.1/components/spinner'
+import 'ElmEventSettingsModal', './elm_event_settings_modal'
 
 export default class ElmEventSettings < HTMLElement
   ENVS = {
     event_callback: 'ees-event-callback'
   }
 
-  attr_reader :user_id, :event_id, :c_spinner, :c_database, :c_contents
+  attr_reader :user_id, :event_id, :c_spinner, :c_database, :c_contents, :c_event_inputs
 
   def initialize
     super
@@ -29,6 +32,7 @@ export default class ElmEventSettings < HTMLElement
     @c_event_inputs = CEventInputs.new(self)
     @c_list_inputs  = CListInputs.new(self)
     @c_contents     = CContents.new(self)
+    @c_modal        = CModal.new(self)
 
     @c_event_inputs.update_event_details(@event_id)
   end
@@ -77,6 +81,30 @@ export default class ElmEventSettings < HTMLElement
     end
   end
 
+  def send_db_candidates(data)
+    if data
+      data_added = []
+
+      data.each do |candidate|
+        @c_database.add_candidate(candidate.full_name, candidate.email) do |fn_token|
+          case fn_token
+          when 'tADDED'
+            data_added.push({is_added: true, data: candidate})
+          when 'tNOADDED'
+            data_added.push({is_added: false, data: candidate})
+          end
+
+          if data_added.length == data.length
+            @c_contents.update_list_container()
+
+            noadded_candidates = data_added.select {|h| h.is_added == false }
+            Events.emit('#app', ElmEventSettingsModal::ENVS.view, noadded_candidates)
+          end
+        end
+      end
+    end
+  end
+
   def init_elm()
     template = """
 <div class='container col-lg-8 my-5'>
@@ -112,19 +140,32 @@ export default class ElmEventSettings < HTMLElement
     
   <!-- Seznam účastníků -->
   <div id='eventSettingsListCandidates' class='card'>
+  <input type='file' id='eventSettingsListCandidatesFileInput' accept='.csv' style='display: none;' />
     <elm-spinner id='spinnerTwo' class='spinner-overlay'></elm-spinner>
 
     <div class='card-body'>
       <div class='d-flex justify-content-between align-items-center'>
         <h5 class='card-title'>Účastníci</h5>
       
-        <div>
-          <button type='button' class='btn btn-outline-primary btn-sm' onclick='eventSettingsListBtnShareClick()'>
-            <i class='bi bi-box-arrow-up-right'></i> Sdílet
+        <div class='nav-item dropdown'>
+          <button class='btn btn-outline-primary btn-sm dropdown-toggle' href='#' id='eventSettingUsersDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+            <i class='bi bi-box-arrow-up-right'></i> Možnosti
           </button>
-          <button type='button' class='btn btn-outline-primary btn-sm' onclick='eventSettingsListBtnFormClick()'>
-            <i class='bi bi-box-arrow-up-right'></i> Formulář
-          </button>
+          <ul class='dropdown-menu text-small shadow' aria-labelledby='eventSettingUsersDropdown' style='position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);' data-popper-placement='bottom-end'>
+            <li><button class='dropdown-item' onclick='eventSettingsListBtnShareClick()'>
+              Sdílet
+            </button></li>
+            <li><button class='dropdown-item'onclick='eventSettingsListBtnFormClick()'>
+              Formulář
+            </button></li>
+            <li><hr class='dropdown-divider'></li>
+            <li><button class='dropdown-item'onclick='eventSettingsListBtnImportClick()'>
+              Import CSV
+            </button></li>
+            <li><button class='dropdown-item'onclick='eventSettingsListBtnExportClick()'>
+              Export CSV
+            </button></li>
+          </ul>
         </div>
       </div>
       
@@ -157,6 +198,8 @@ export default class ElmEventSettings < HTMLElement
     </div>
   </div>
 </div>
+
+<elm-event-settings-modal></elm-event-settings-modal>
     """
 
     self.innerHTML = template

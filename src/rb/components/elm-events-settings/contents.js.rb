@@ -5,15 +5,13 @@ export default class CContents
     @list_container = @parent.query_selector('#eventsSettingsListContainer')
   end
 
-  def update_list_container()
+  def update_list_container(&callback)
     @parent.c_database.get_event_details() do |event_details|
       elm_lis = []
 
       if event_details
-
-        event_details.each do |event|
+        event_details.each_with_index do |event, i|
           date = Date(event.date).new.to_locale_date_string("cs-CZ")
-
           template = """
 <li class='list-group-item d-flex justify-content-between align-items-center'>
   <span style='cursor: pointer;' onclick='eventsSettingsListInputEditBtnClick(#{event.id})'>
@@ -30,6 +28,8 @@ export default class CContents
       end
 
       @list_container.innerHTML = elm_lis.join('')
+
+      callback.call() if callback
     end
   end
 end

@@ -70,4 +70,11 @@ import ElmEventCandidates from "./elements/elm_event_candidates";
 window.customElements.define(
   "elm-event-candidates",
   ElmEventCandidates
+);
+
+import ElmEventSettingsModal from "./elements/elm_event_settings_modal";
+
+window.customElements.define(
+  "elm-event-settings-modal",
+  ElmEventSettingsModal
 )

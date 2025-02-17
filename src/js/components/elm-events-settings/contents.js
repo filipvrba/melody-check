@@ -4,12 +4,12 @@ export default class CContents {
     this._listContainer = this._parent.querySelector("#eventsSettingsListContainer")
   };
 
-  updateListContainer() {
+  updateListContainer(callback) {
     return this._parent.cDatabase.getEventDetails((eventDetails) => {
       let elmLis = [];
 
       if (eventDetails) {
-        for (let event of eventDetails) {
+        eventDetails.forEach((event, i) => {
           let date = (new Date(event.date)).toLocaleDateString("cs-CZ");
           let template = `${`
 <li class='list-group-item d-flex justify-content-between align-items-center'>
@@ -22,11 +22,12 @@ export default class CContents {
   </button>
 </li>
           `}`;
-          elmLis.push(template)
-        }
+          return elmLis.push(template)
+        })
       };
 
-      return this._listContainer.innerHTML = elmLis.join("")
+      this._listContainer.innerHTML = elmLis.join("");
+      if (callback) return callback.call()
     })
   }
 }
