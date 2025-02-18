@@ -29,7 +29,9 @@ def get(options, &callback)
   uri = "#{process.env.URL_API}?token=#{options.tokens.client}" +
       "&database=#{options.db}&query=#{query_encode}"
 
-  fetch(uri)
+  fetch(uri, {
+    keepalive: true
+  })
   .then(lambda do |response|
     response.json()
   end)
@@ -76,11 +78,12 @@ def send(method, options, &callback)
   
   fetch(process.env.URL_API, {
     method: method,
+    keepalive: true,
     headers: {
       'Token': options.tokens.server,
       'Database': options.db,
       'Query': options.query,
-    }
+    },
   })
   .then(lambda do |response|
     response.json()

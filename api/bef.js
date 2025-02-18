@@ -19,7 +19,7 @@ function get(options, callback) {
   let queryEncode = encodeURIComponent(options.query);
   let uri = `${process.env.URL_API}?token=${options.tokens.client}&database=${options.db}&query=${queryEncode}`;
 
-  return fetch(uri).then(response => response.json()).then((data) => {
+  return fetch(uri, {keepalive: true}).then(response => response.json()).then((data) => {
     if (data.statusCode) {
       console.error(`GET: ${data.statusCode} ${data.status}`);
       if (callback) return callback([])
@@ -59,11 +59,15 @@ function set(options, callback) {
 function send(method, options, callback) {
   method = method.toUpperCase();
 
-  return fetch(process.env.URL_API, {method, headers: {
-    Token: options.tokens.server,
-    Database: options.db,
-    Query: options.query
-  }}).then(response => response.json()).then((data) => {
+  return fetch(
+    process.env.URL_API,
+
+    {method, keepalive: true, headers: {
+      Token: options.tokens.server,
+      Database: options.db,
+      Query: options.query
+    }}
+  ).then(response => response.json()).then((data) => {
     if (callback) return callback(data)
   })
 };
