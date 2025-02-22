@@ -50,8 +50,8 @@ export default class ElmDashboardCandidates extends HTMLElement {
       if (haveCandidates) {
         for (let candidate of candidates) {
           let icon = this.getConfirmIconElement(candidate.confirmedAttendance);
-          let tdEmail = this._noEmails ? "<td></td>" : `<td>${candidate.email}</td>`;
-          let tdArrival = this._noEmails ? "<td></td>" : `<td>${candidate.arrivalTimes.join(" / ")}</td>`;
+          let tdEmail = this._noEmails ? "" : `<td>${candidate.email}</td>`;
+          let tdArrival = this._noEmails ? "" : `<td>${candidate.arrivalTimes.join(" / ")}</td>`;
           let template = `${`
           <tr>
             <th scope='row'>${candidate.id}</th>

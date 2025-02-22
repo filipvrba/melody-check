@@ -51,8 +51,8 @@ export default class ElmDashboardCandidates < HTMLElement
       if have_candidates
         candidates.each do |candidate|
           icon = get_confirm_icon_element(candidate.confirmed_attendance)
-          td_email   = @no_emails ? '<td></td>' : "<td>#{candidate.email}</td>"
-          td_arrival = @no_emails ? '<td></td>' : "<td>#{candidate.arrival_times.join(' / ')}</td>"
+          td_email   = @no_emails ? '' : "<td>#{candidate.email}</td>"
+          td_arrival = @no_emails ? '' : "<td>#{candidate.arrival_times.join(' / ')}</td>"
 
           template = """
           <tr>
