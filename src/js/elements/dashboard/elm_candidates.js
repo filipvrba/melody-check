@@ -43,6 +43,7 @@ export default class ElmDashboardCandidates extends HTMLElement {
 
   updateListBody() {
     return this._cDatabase.getCandidates((candidates) => {
+      let tdEmpty;
       let elements = [];
       let haveCandidates = candidates.length > 0;
 
@@ -67,12 +68,14 @@ export default class ElmDashboardCandidates extends HTMLElement {
 
         return this._listBody.innerHTML = elements.join("")
       } else {
+        tdEmpty = this._noEmails ? "" : "<td class='text-center'>---</td>";
         return this._listBody.innerHTML = `${`
         <tr>
           <th scope='row'></th>
           <td class='text-center'>---</td>
-          <td class='text-center'>žádní účastníci</td>
           <td class='text-center'>---</td>
+          ${tdEmpty}
+          ${tdEmpty}
         </tr>
         `}`
       }
@@ -80,8 +83,9 @@ export default class ElmDashboardCandidates extends HTMLElement {
   };
 
   initElm() {
-    let thEmail = this._noEmails ? "<th scope='col'></th>" : "<th scope='col'>Email</th>";
-    let thArrival = this._noEmails ? "<th scope='col'></th>" : "<th scope='col'>Příchod</th>";
+    let thEmail = this._noEmails ? "" : "<th scope='col'>Email</th>";
+    let thArrival = this._noEmails ? "" : "<th scope='col'>Příchod</th>";
+    let tdEmpty = this._noEmails ? "" : "<td class='text-center'>~~~</td>";
     let template = `${`
 <!-- Tabulka kandidátů -->
 <div class='table-responsive rounded shadow'>
@@ -98,9 +102,10 @@ export default class ElmDashboardCandidates extends HTMLElement {
     <tbody id='dashboardCandidatesListBody'>
       <tr>
         <th scope='row'></th>
-        <td class='text-center'>---</td>
-        <td class='text-center'>načítání</td>
-        <td class='text-center'>---</td>
+        <td class='text-center'>~~~</td>
+        <td class='text-center'>~~~</td>
+        ${tdEmpty}
+        ${tdEmpty}
       </tr>
     </tbody>
   </table>

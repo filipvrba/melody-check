@@ -71,12 +71,15 @@ export default class ElmDashboardCandidates < HTMLElement
 
         @list_body.innerHTML = elements.join('')
       else
+        td_empty   = @no_emails ? '' : "<td class='text-center'>---</td>"
+
         @list_body.innerHTML = """
         <tr>
           <th scope='row'></th>
           <td class='text-center'>---</td>
-          <td class='text-center'>žádní účastníci</td>
           <td class='text-center'>---</td>
+          #{td_empty}
+          #{td_empty}
         </tr>
         """
       end
@@ -84,8 +87,9 @@ export default class ElmDashboardCandidates < HTMLElement
   end
 
   def init_elm()
-    th_email   = @no_emails ? "<th scope='col'></th>" : "<th scope='col'>Email</th>"
-    th_arrival = @no_emails ? "<th scope='col'></th>" : "<th scope='col'>Příchod</th>"
+    th_email   = @no_emails ? "" : "<th scope='col'>Email</th>"
+    th_arrival = @no_emails ? "" : "<th scope='col'>Příchod</th>"
+    td_empty   = @no_emails ? '' : "<td class='text-center'>~~~</td>"
 
     template = """
 <!-- Tabulka kandidátů -->
@@ -103,9 +107,10 @@ export default class ElmDashboardCandidates < HTMLElement
     <tbody id='dashboardCandidatesListBody'>
       <tr>
         <th scope='row'></th>
-        <td class='text-center'>---</td>
-        <td class='text-center'>načítání</td>
-        <td class='text-center'>---</td>
+        <td class='text-center'>~~~</td>
+        <td class='text-center'>~~~</td>
+        #{td_empty}
+        #{td_empty}
       </tr>
     </tbody>
   </table>
