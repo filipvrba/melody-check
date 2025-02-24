@@ -76,13 +76,13 @@ export default class CListInputs {
   };
 
   removeBtnClick(candidateId) {
-    return this._parent.cDatabase.removeCandidate(
-      candidateId,
-
-      (message) => {
+    let fnTrue = () => (
+      this._parent.cDatabase.removeCandidate(candidateId, (message) => {
         if (message) return this._parent.cContents.updateListContainer()
-      }
-    )
+      })
+    );
+
+    return Modals.confirm({fnTrue})
   };
 
   btnFormClick() {
@@ -100,7 +100,17 @@ export default class CListInputs {
   };
 
   btnImportClick() {
-    return this._inputFile.click()
+    let fnTrue = () => this._inputFile.click();
+    let message = `${`
+<p>Při importu kandidátů musí CSV soubor obsahovat následující sloupce:</p>
+<ul>
+    <li><strong>fullName</strong> – Jméno kandidáta</li>
+    <li><strong>email</strong> – E-mailová adresa</li>
+</ul>
+<p>Hodnoty musí být odděleny čárkou (<code>,</code>).</p>
+<p>Opravdu chcete provést tuto akci?</p>
+    `}`;
+    return Modals.confirm({message, fnTrue})
   };
 
   btnExportClick() {

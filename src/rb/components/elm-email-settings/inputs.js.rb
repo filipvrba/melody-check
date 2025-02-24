@@ -21,16 +21,20 @@ export default class CInputs
   end
 
   def save_btn_click()
-    Events.emit('#app', ENVS.btn_click_0, {
-      registered: {
-        subject: @registered_subject.value,
-        html:    @registered_template.value,
-      },
-      unconfirmed: {
-        subject: @unconfirmed_subject.value,
-        html:    @unconfirmed_template.value,
-      }
-    })
+    fn_true = lambda do
+      Events.emit('#app', ENVS.btn_click_0, {
+        registered: {
+          subject: @registered_subject.value,
+          html:    @registered_template.value,
+        },
+        unconfirmed: {
+          subject: @unconfirmed_subject.value,
+          html:    @unconfirmed_template.value,
+        }
+      })
+    end
+
+    Modals.confirm({fn_true: fn_true})
   end
 
   def set_disable(is_disabled)

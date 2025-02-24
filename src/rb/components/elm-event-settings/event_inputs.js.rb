@@ -28,20 +28,24 @@ export default class CEventInputs
   end
 
   def save_details_btn_click()
-    is_title = have_title()
-    is_date  = have_date()
+    fn_true = lambda do
+      is_title = have_title()
+      is_date  = have_date()
 
-    Bootstrap.change_valid_element(@input_title, is_title)
-    Bootstrap.change_valid_element(@input_date, is_date)
+      Bootstrap.change_valid_element(@input_title, is_title)
+      Bootstrap.change_valid_element(@input_date, is_date)
 
-    unless is_title && is_date
-      return
+      unless is_title && is_date
+        return
+      end
+
+      Events.emit('#app', ENVS.btn_click_0, {
+        title: @input_title.value,
+        date:  @input_date.value
+      })
     end
 
-    Events.emit('#app', ENVS.btn_click_0, {
-      title: @input_title.value,
-      date:  @input_date.value
-    })
+    Modals.confirm({fn_true: fn_true})
   end
 
   def input_title_keypress()

@@ -58,11 +58,19 @@ export default class CInputs
   end
 
   def remove_btn_click(event_id)
-    @event_id_history = event_id
+    fn_true = lambda do 
+      @event_id_history = event_id
 
-    @parent.c_database.remove_event() do |message|
-      @parent.c_contents.update_list_container() if message
+      @parent.c_database.remove_event() do |message|
+        @parent.c_contents.update_list_container() if message
+      end
     end
+
+    confirm_options = {
+      fn_true: fn_true,
+    }
+
+    Modals.confirm(confirm_options)
   end
 
   def input_event_name_keypress()

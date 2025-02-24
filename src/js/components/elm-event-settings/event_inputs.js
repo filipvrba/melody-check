@@ -44,17 +44,21 @@ export default class CEventInputs {
   };
 
   saveDetailsBtnClick() {
-    let isTitle = this.haveTitle();
-    let isDate = this.haveDate();
-    Bootstrap.changeValidElement(this._inputTitle, isTitle);
-    Bootstrap.changeValidElement(this._inputDate, isDate);
-    if (!isTitle || !isDate) return;
+    let fnTrue = () => {
+      let isTitle = this.haveTitle();
+      let isDate = this.haveDate();
+      Bootstrap.changeValidElement(this._inputTitle, isTitle);
+      Bootstrap.changeValidElement(this._inputDate, isDate);
+      if (!isTitle || !isDate) return;
 
-    return Events.emit(
-      "#app",
-      CEventInputs.ENVS.btnClick0,
-      {title: this._inputTitle.value, date: this._inputDate.value}
-    )
+      return Events.emit(
+        "#app",
+        CEventInputs.ENVS.btnClick0,
+        {title: this._inputTitle.value, date: this._inputDate.value}
+      )
+    };
+
+    return Modals.confirm({fnTrue})
   };
 
   inputTitleKeypress() {

@@ -12,17 +12,21 @@ export default class CInputs {
   };
 
   saveBtnClick() {
-    return Events.emit("#app", CInputs.ENVS.btnClick0, {
-      registered: {
-        subject: this._registeredSubject.value,
-        html: this._registeredTemplate.value
-      },
+    let fnTrue = () => (
+      Events.emit("#app", CInputs.ENVS.btnClick0, {
+        registered: {
+          subject: this._registeredSubject.value,
+          html: this._registeredTemplate.value
+        },
 
-      unconfirmed: {
-        subject: this._unconfirmedSubject.value,
-        html: this._unconfirmedTemplate.value
-      }
-    })
+        unconfirmed: {
+          subject: this._unconfirmedSubject.value,
+          html: this._unconfirmedTemplate.value
+        }
+      })
+    );
+
+    return Modals.confirm({fnTrue})
   };
 
   setDisable(isDisabled) {

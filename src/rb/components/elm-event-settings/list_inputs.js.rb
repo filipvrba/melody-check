@@ -58,11 +58,15 @@ export default class CListInputs
   end
 
   def remove_btn_click(candidate_id)
-    @parent.c_database.remove_candidate(candidate_id) do |message|
-      if message
-        @parent.c_contents.update_list_container()
+    fn_true = lambda do
+      @parent.c_database.remove_candidate(candidate_id) do |message|
+        if message
+          @parent.c_contents.update_list_container()
+        end
       end
     end
+
+    Modals.confirm({fn_true: fn_true})
   end
 
   def btn_form_click()
@@ -74,7 +78,20 @@ export default class CListInputs
   end
 
   def btn_import_click()
-    @input_file.click()
+    fn_true = lambda do
+      @input_file.click()
+    end
+
+    message = """
+<p>Při importu kandidátů musí CSV soubor obsahovat následující sloupce:</p>
+<ul>
+    <li><strong>fullName</strong> – Jméno kandidáta</li>
+    <li><strong>email</strong> – E-mailová adresa</li>
+</ul>
+<p>Hodnoty musí být odděleny čárkou (<code>,</code>).</p>
+<p>Opravdu chcete provést tuto akci?</p>
+    """
+    Modals.confirm({message: message, fn_true: fn_true})
   end
 
   def btn_export_click()

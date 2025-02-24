@@ -8,4 +8,5 @@ import "./core/bootstrap";
 import "./core/string";
 import "./core/settings";
 import "./core/clock";
-import "./core/csv_parser"
+import "./core/csv_parser";
+import "./core/modals"

@@ -72,11 +72,16 @@ export default class CInputs {
   };
 
   removeBtnClick(eventId) {
-    this._eventIdHistory = eventId;
+    let fnTrue = () => {
+      this._eventIdHistory = eventId;
 
-    return this._parent.cDatabase.removeEvent((message) => {
-      if (message) return this._parent.cContents.updateListContainer()
-    })
+      return this._parent.cDatabase.removeEvent((message) => {
+        if (message) return this._parent.cContents.updateListContainer()
+      })
+    };
+
+    let confirmOptions = {fnTrue};
+    return Modals.confirm(confirmOptions)
   };
 
   inputEventNameKeypress() {
