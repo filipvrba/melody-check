@@ -52,13 +52,12 @@ export default class ElmDashboardCandidates < HTMLElement
         candidates.each do |candidate|
           icon = get_confirm_icon_element(candidate.confirmed_attendance)
           td_email   = @no_emails ? '' : "<td>#{candidate.email}</td>"
-          td_arrival = @no_emails ? '' : "<td>#{candidate.arrival_times.join(' / ')}</td>"
 
           template = """
           <tr>
             <th scope='row'>#{candidate.id}</th>
             <td>#{candidate.full_name}</td>
-            #{td_arrival}
+            <td>#{candidate.arrival_times.join(' / ')}</td>
             #{td_email}
             <td class='text-center'>
               #{icon}
@@ -78,7 +77,7 @@ export default class ElmDashboardCandidates < HTMLElement
           <th scope='row'></th>
           <td class='text-center'>---</td>
           <td class='text-center'>---</td>
-          #{td_empty}
+          <td class='text-center'>---</td>
           #{td_empty}
         </tr>
         """
@@ -88,7 +87,6 @@ export default class ElmDashboardCandidates < HTMLElement
 
   def init_elm()
     th_email   = @no_emails ? "" : "<th scope='col'>Email</th>"
-    th_arrival = @no_emails ? "" : "<th scope='col'>Příchod</th>"
     td_empty   = @no_emails ? '' : "<td class='text-center'>~~~</td>"
 
     template = """
@@ -99,7 +97,7 @@ export default class ElmDashboardCandidates < HTMLElement
       <tr>
         <th scope='col'>#</th>
         <th scope='col'>Celé Jméno</th>
-        #{th_arrival}
+        <th scope='col'>Příchod</th>
         #{th_email}
         <th scope='col' class='text-center'>Potvrzená Účast</th>
       </tr>
@@ -109,7 +107,7 @@ export default class ElmDashboardCandidates < HTMLElement
         <th scope='row'></th>
         <td class='text-center'>~~~</td>
         <td class='text-center'>~~~</td>
-        #{td_empty}
+        <td class='text-center'>~~~</td>
         #{td_empty}
       </tr>
     </tbody>

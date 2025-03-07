@@ -51,12 +51,11 @@ export default class ElmDashboardCandidates extends HTMLElement {
         for (let candidate of candidates) {
           let icon = this.getConfirmIconElement(candidate.confirmedAttendance);
           let tdEmail = this._noEmails ? "" : `<td>${candidate.email}</td>`;
-          let tdArrival = this._noEmails ? "" : `<td>${candidate.arrivalTimes.join(" / ")}</td>`;
           let template = `${`
           <tr>
             <th scope='row'>${candidate.id}</th>
             <td>${candidate.fullName}</td>
-            ${tdArrival}
+            <td>${candidate.arrivalTimes.join(" / ")}</td>
             ${tdEmail}
             <td class='text-center'>
               ${icon}
@@ -74,7 +73,7 @@ export default class ElmDashboardCandidates extends HTMLElement {
           <th scope='row'></th>
           <td class='text-center'>---</td>
           <td class='text-center'>---</td>
-          ${tdEmpty}
+          <td class='text-center'>---</td>
           ${tdEmpty}
         </tr>
         `}`
@@ -84,7 +83,6 @@ export default class ElmDashboardCandidates extends HTMLElement {
 
   initElm() {
     let thEmail = this._noEmails ? "" : "<th scope='col'>Email</th>";
-    let thArrival = this._noEmails ? "" : "<th scope='col'>Příchod</th>";
     let tdEmpty = this._noEmails ? "" : "<td class='text-center'>~~~</td>";
     let template = `${`
 <!-- Tabulka kandidátů -->
@@ -94,7 +92,7 @@ export default class ElmDashboardCandidates extends HTMLElement {
       <tr>
         <th scope='col'>#</th>
         <th scope='col'>Celé Jméno</th>
-        ${thArrival}
+        <th scope='col'>Příchod</th>
         ${thEmail}
         <th scope='col' class='text-center'>Potvrzená Účast</th>
       </tr>
@@ -104,7 +102,7 @@ export default class ElmDashboardCandidates extends HTMLElement {
         <th scope='row'></th>
         <td class='text-center'>~~~</td>
         <td class='text-center'>~~~</td>
-        ${tdEmpty}
+        <td class='text-center'>~~~</td>
         ${tdEmpty}
       </tr>
     </tbody>
