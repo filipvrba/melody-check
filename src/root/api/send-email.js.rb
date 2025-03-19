@@ -23,12 +23,13 @@ export default async def handler(req, res)
       }
     end
 
-    request = MJ.post('send').request({ Messages: messages })
+    request = MJ.post('send', {'version': 'v3.1'})
+      .request({ Messages: messages })
     result  = await request
 
     res.status(200).json({ message: 'E-maily byly odeslány!', result: result.body })
   rescue => error
     res.status(500).json({ error: 'Chyba při odesílání e-mailů',
-      details: error })
+      details: error.message })
   end
 end

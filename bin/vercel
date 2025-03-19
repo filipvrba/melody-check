@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rjsv -t -w -s 'src/root src/rb' -o '. src/js' &
+vercel dev
+
+trap - SIGINT
+kill $!

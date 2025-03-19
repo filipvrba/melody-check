@@ -28,7 +28,7 @@ export default async function handler(req, res) {
       HTMLPart: email.html
     }));
 
-    let request = MJ.post("send").request({Messages: messages});
+    let request = MJ.post("send", {version: "v3.1"}).request({Messages: messages});
     let result = await(request);
 
     res.status(200).json({
@@ -38,7 +38,7 @@ export default async function handler(req, res) {
   } catch (error) {
     res.status(500).json({
       error: "Chyba při odesílání e-mailů",
-      details: error
+      details: error.message
     })
   }
 }
