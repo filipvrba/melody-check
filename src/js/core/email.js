@@ -71,6 +71,14 @@ class Email {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({emails})
     }
+  };
+
+  static send(candidates, callback) {
+    return fetch("/api/send-email", Email.request(candidates)).then(response => (
+      response.json()
+    )).then((obj) => {
+      if (callback) return callback(obj)
+    })
   }
 };
 

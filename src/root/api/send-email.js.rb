@@ -23,6 +23,7 @@ export default async def handler(req, res)
       }
     end
 
+    puts { Messages: messages }
     request = MJ.post('send').request({ Messages: messages })
     result  = await request
 

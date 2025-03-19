@@ -141,8 +141,9 @@ export default class CListInputs
 
       # puts id_candidates
       @parent.c_database.email_candidates(id_candidates) do |candidates|
-        request = Email.request(candidates)
-        
+        Email.send(candidates) do |message|
+          puts message
+        end
       end
       # TODO: send email from api
       # @parent.c_database.remove_email_logs(id_candidates) do |message|

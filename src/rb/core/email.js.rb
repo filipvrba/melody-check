@@ -79,5 +79,15 @@ class Email
       })
     }
   end
+
+  def self.send(candidates, &callback)
+    fetch('/api/send-email', Email.request(candidates))
+    .then(lambda do |response|
+      response.json()
+    end)
+    .then(lambda do |obj|
+      callback(obj) if callback
+    end)
+  end
 end
 window.Email = Email

@@ -162,11 +162,7 @@ export default class CListInputs {
 
       return this._parent.cDatabase.emailCandidates(
         idCandidates,
-
-        (candidates) => {
-          let request = Email.request(candidates);
-          return request
-        }
+        candidates => Email.send(candidates, message => console.log(message))
       )
     };
 
