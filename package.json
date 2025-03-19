@@ -14,6 +14,7 @@
   "dependencies": {
     "bootstrap-icons": "^1.11.3",
     "crypto-js": "^4.2.0",
+    "node-mailjet": "^6.0.8",
     "papaparse": "^5.5.2"
   }
 }

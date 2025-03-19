@@ -145,25 +145,31 @@ export default class ElmEventSettings < HTMLElement
       <div class='d-flex justify-content-between align-items-center'>
         <h5 class='card-title'>Účastníci</h5>
       
-        <div class='nav-item dropdown'>
-          <button class='btn btn-outline-primary btn-sm dropdown-toggle' href='#' id='eventSettingUsersDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
-            <i class='bi bi-box-arrow-up-right'></i> Možnosti
+        <div class='d-flex flex-sm-row flex-column gap-2'>
+          <button class='btn btn-outline-success btn-sm' onclick='eventSettingUsersBtnSendEmailClick()'>
+            <i class='bi bi-envelope'></i> Poslat E-mail
           </button>
-          <ul class='dropdown-menu text-small shadow' aria-labelledby='eventSettingUsersDropdown' style='position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);' data-popper-placement='bottom-end'>
-            <li><button class='dropdown-item' onclick='eventSettingsListBtnShareClick()'>
-              Sdílet
-            </button></li>
-            <li><button class='dropdown-item'onclick='eventSettingsListBtnFormClick()'>
-              Formulář
-            </button></li>
-            <li><hr class='dropdown-divider'></li>
-            <li><button class='dropdown-item'onclick='eventSettingsListBtnImportClick()'>
-              Import CSV
-            </button></li>
-            <li><button class='dropdown-item'onclick='eventSettingsListBtnExportClick()'>
-              Export CSV
-            </button></li>
-          </ul>
+
+          <div class='nav-item dropdown'>
+            <button class='btn btn-outline-primary btn-sm dropdown-toggle' href='#' id='eventSettingUsersDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+              <i class='bi bi-box-arrow-up-right'></i> Možnosti
+            </button>
+            <ul class='dropdown-menu text-small shadow' aria-labelledby='eventSettingUsersDropdown' style='position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);' data-popper-placement='bottom-end'>
+              <li><button class='dropdown-item' onclick='eventSettingsListBtnShareClick()'>
+                Sdílet
+              </button></li>
+              <li><button class='dropdown-item'onclick='eventSettingsListBtnFormClick()'>
+                Formulář
+              </button></li>
+              <li><hr class='dropdown-divider'></li>
+              <li><button class='dropdown-item'onclick='eventSettingsListBtnImportClick()'>
+                Import CSV
+              </button></li>
+              <li><button class='dropdown-item'onclick='eventSettingsListBtnExportClick()'>
+                Export CSV
+              </button></li>
+            </ul>
+          </div>
         </div>
       </div>
       

@@ -1,4 +1,6 @@
 export default class CContents
+  attr_reader :list_container
+
   def initialize(parent)
     @parent = parent
 
@@ -22,7 +24,10 @@ export default class CContents
       @candidates.each_with_index do |candidate, i|
         template = """
 <li class='list-group-item d-flex justify-content-between align-items-center'>
-  <span>#{candidate.full_name} (#{candidate.email})</span>
+  <div class='form-check'>
+    <input class='form-check-input' type='checkbox' value='' id='eventSettingsListItemCheck-#{candidate.id}'>
+    <span>#{candidate.full_name} (#{candidate.email})</span>
+  </div>
   <div class='d-flex gap-2'>
     <button type='button' class='btn btn-warning btn-sm' onclick='eventSettingsListEditBtnClick(#{i})'>
       <i class='bi bi-pen'></i>

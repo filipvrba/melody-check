@@ -21,7 +21,8 @@ export default class CListInputs {
     window.eventSettingsListBtnFormClick = this.btnFormClick.bind(this);
     window.eventSettingsListBtnShareClick = this.btnShareClick.bind(this);
     window.eventSettingsListBtnImportClick = this.btnImportClick.bind(this);
-    window.eventSettingsListBtnExportClick = this.btnExportClick.bind(this)
+    window.eventSettingsListBtnExportClick = this.btnExportClick.bind(this);
+    window.eventSettingUsersBtnSendEmailClick = this.btnSendEmailClick.bind(this)
   };
 
   connectedCallback() {
@@ -139,6 +140,30 @@ export default class CListInputs {
       let fileName = `${eventTitle}_candidates.csv`;
       return CSVParser.downloadCsv(data, fileName)
     })
+  };
+
+  btnSendEmailClick() {
+    let fnTrue = () => {
+      let elmCandidates = Array.from(this._parent.cContents.listContainer.querySelectorAll("[id^=\"eventSettingsListItemCheck"));
+
+      let infoCandidates = elmCandidates.map(candidate => ({
+        candidateId: candidate.id.split("-")[1],
+        checked: candidate.checked
+      }));
+
+      let checkedCandidates = infoCandidates.filter(h => h.checked);
+      let idCandidates = [];
+
+      if (checkedCandidates.length > 0) {
+        idCandidates = checkedCandidates.map(h => parseInt(h.candidateId))
+      } else {
+        idCandidates = infoCandidates.map(h => parseInt(h.candidateId))
+      };
+
+      return console.log(idCandidates)
+    };
+
+    return Modals.confirm({fnTrue})
   };
 
   inputFullNameKeypress() {

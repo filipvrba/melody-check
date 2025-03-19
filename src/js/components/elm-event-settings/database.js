@@ -96,5 +96,16 @@ export default class CDatabase {
       this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
       if (callback) return callback(message)
     })
+  };
+
+  removeEmailLogs(idCandidates, callback) {
+    if (idCandidates.length <= 0) return;
+    let query = `DELETE FROM email_logs WHERE candidate_id IN (${idCandidates.join(", ")});`;
+    this._parent.cSpinner.setDisplayWithId(true, "#spinnerTwo");
+
+    return Net.bef(query, (message) => {
+      this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
+      if (callback) return callback(message)
+    })
   }
 }

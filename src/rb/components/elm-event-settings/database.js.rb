@@ -105,4 +105,19 @@ export default class CDatabase
       callback(message) if callback
     end
   end
+
+  def remove_email_logs(id_candidates, &callback)
+    unless id_candidates.length > 0
+      return
+    end
+
+    query = "DELETE FROM email_logs WHERE candidate_id IN (#{id_candidates.join(', ')});"
+
+    @parent.c_spinner.set_display_with_id(true, '#spinnerTwo')
+    Net.bef(query) do |message|
+      @parent.c_spinner.set_display_with_id(false, '#spinnerTwo')
+
+      callback(message) if callback
+    end
+  end
 end
