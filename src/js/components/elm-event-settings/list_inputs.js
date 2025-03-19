@@ -160,7 +160,14 @@ export default class CListInputs {
         idCandidates = infoCandidates.map(h => parseInt(h.candidateId))
       };
 
-      return console.log(idCandidates)
+      return this._parent.cDatabase.emailCandidates(
+        idCandidates,
+
+        (candidates) => {
+          let request = Email.request(candidates);
+          return request
+        }
+      )
     };
 
     return Modals.confirm({fnTrue})

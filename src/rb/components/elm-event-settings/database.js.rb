@@ -120,4 +120,49 @@ export default class CDatabase
       callback(message) if callback
     end
   end
+
+  def email_candidates(id_candidates, &callback)
+    unless id_candidates.length > 0
+      return
+    end
+
+    query = "SELECT 
+  c.id AS candidate_id, 
+  c.email, 
+  c.full_name, 
+  e.id AS event_id, 
+  e.event_name, 
+  e.event_date,
+  et.registered_subject,
+  et.registered_body
+FROM candidates c
+JOIN events e 
+  ON c.event_id = e.id
+LEFT JOIN email_templates et 
+  ON e.id = et.event_id 
+WHERE c.id IN (#{id_candidates.join(', ')});"
+
+    Net.bef(query) do |rows|
+      have_rows = rows && rows.length > 0
+
+      if have_rows
+        result = rows.map do |h|
+          {
+            candidate_id: h['candidate_id'].to_i,
+            email: h.email.decode_base64(),
+            full_name: h['full_name'].decode_base64(),
+            event_id: h['event_id'].to_i,
+            event_name: h['event_name'].decode_base64(),
+            event_date: h['event_date'].decode_base64(),
+            registered_subject: h['registered_subject'].decode_base64(),
+            registered_body: h['registered_body'].decode_base64(),
+          }
+        end
+
+        callback(result) if callback
+      else
+        callback(nil) if callback
+      end
+    end
+  end
 end

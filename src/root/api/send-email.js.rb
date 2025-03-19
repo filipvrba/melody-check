@@ -3,29 +3,31 @@ import 'mailjet', 'node-mailjet'
 MJ = mailjet.api_connect(process.env.MAILJET_API_KEY, process.env.MAILJET_SECRET_KEY)
 
 export default async def handler(req, res)
-  if req.method == 'POST'
-    to      = req.body.to
-    subject = req.body.subject
-    text    = req.body.text
-    html    = req.body.html
+  unless req.method == 'POST'
+    return res.status(405).json({ error: 'Pouze POST požadavky jsou povoleny.' })
+  end
 
-    begin
-      request = MJ.post('send').request({
-        From: { Email: 'melodycheck.info@gmail.com', Name: 'MelodyCheck' },
-        To: [{ Email: to }],
-        Subject: subject,
-        TextPart: text,
-        HTMLPart: html,
-      })
+  emails = req.body.emails
 
-      result = await request
+  if !emails || !Array.isArray(emails) || emails.length == 0
+    return res.status(400).json({ error: 'Chybí seznam e-mailů.' })
+  end
 
-      res.status(200).json({ message: 'The email has been sent!', result: result })
-
-    rescue => error
-      res.status(500).json({ error: 'Error when sending an email', details: error.message })
+  begin
+    messages = emails.map() do |email|
+      {
+        From: { Email: 'melodycheck.info@gmail.com', Name: 'MellodyCheck Info' },
+        To: [{ Email: email.to, Name: email.name }],
+        Subject: email.subject,
+        HTMLPart: email.html,
+      }
     end
-  else
-    res.status(405).json({ error: 'Only POST requests are allowed.' })
+
+    request = MJ.post('send').request({ Messages: messages })
+    result  = await request
+
+    res.status(200).json({ message: 'E-maily byly odeslány!', result: result.body })
+  rescue => error
+    res.status(500).json({ error: 'Chyba při odesílání e-mailů', details: error.message })
   end
 end

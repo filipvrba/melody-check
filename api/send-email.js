@@ -6,32 +6,39 @@ const MJ = mailjet.apiConnect(
 );
 
 export default async function handler(req, res) {
-  let to, subject, text, html;
+  if (req.method !== "POST") {
+    return res.status(405).json({error: "Pouze POST požadavky jsou povoleny."})
+  };
 
-  if (req.method === "POST") {
-    to = req.body.to;
-    subject = req.body.subject;
-    text = req.body.text;
-    html = req.body.html;
+  let emails = req.body.emails;
 
-    try {
-      let request = MJ.post("send").request({
-        From: {Email: "melodycheck.info@gmail.com", Name: "MelodyCheck"},
-        To: [{Email: to}],
-        Subject: subject,
-        TextPart: text,
-        HTMLPart: html
-      });
+  if (!emails || !Array.isArray(emails) || emails.length === 0) {
+    return res.status(400).json({error: "Chybí seznam e-mailů."})
+  };
 
-      let result = await(request);
-      res.status(200).json({message: "The email has been sent!", result})
-    } catch (error) {
-      res.status(500).json({
-        error: "Error when sending an email",
-        details: error.message
-      })
-    }
-  } else {
-    return res.status(405).json({error: "Only POST requests are allowed."})
+  try {
+    let messages = emails.map(email => ({
+      From: {
+        Email: "melodycheck.info@gmail.com",
+        Name: "MellodyCheck Info"
+      },
+
+      To: [{Email: email.to, Name: email.name}],
+      Subject: email.subject,
+      HTMLPart: email.html
+    }));
+
+    let request = MJ.post("send").request({Messages: messages});
+    let result = await(request);
+
+    res.status(200).json({
+      message: "E-maily byly odeslány!",
+      result: result.body
+    })
+  } catch (error) {
+    res.status(500).json({
+      error: "Chyba při odesílání e-mailů",
+      details: error.message
+    })
   }
 }
