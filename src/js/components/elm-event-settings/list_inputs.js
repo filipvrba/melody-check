@@ -160,9 +160,20 @@ export default class CListInputs {
         idCandidates = infoCandidates.map(h => parseInt(h.candidateId))
       };
 
+      this._parent.cSpinner.setDisplayWithId(true, "#spinnerTwo");
+
       return this._parent.cDatabase.emailCandidates(
         idCandidates,
-        candidates => Email.send(candidates, message => console.log(message))
+
+        candidates => (
+          Email.send(candidates, (message) => {
+            this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
+
+            for (let elmCandidate of elmCandidates) {
+              if (elmCandidate.checked) elmCandidate.checked = false
+            }
+          })
+        )
       )
     };
 

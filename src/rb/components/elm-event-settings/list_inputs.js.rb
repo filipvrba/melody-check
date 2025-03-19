@@ -139,16 +139,18 @@ export default class CListInputs
         id_candidates = checked_candidates.map{|h| h.candidate_id.to_i}
       end
 
-      # puts id_candidates
+      @parent.c_spinner.set_display_with_id(true, '#spinnerTwo')
       @parent.c_database.email_candidates(id_candidates) do |candidates|
         Email.send(candidates) do |message|
-          puts message
+          @parent.c_spinner.set_display_with_id(false, '#spinnerTwo')
+          
+          elm_candidates.each do |elm_candidate|
+            if elm_candidate.checked
+              elm_candidate.checked = false
+            end
+          end
         end
       end
-      # TODO: send email from api
-      # @parent.c_database.remove_email_logs(id_candidates) do |message|
-      #   puts message
-      # end
     end
 
     Modals.confirm({fn_true: fn_true})

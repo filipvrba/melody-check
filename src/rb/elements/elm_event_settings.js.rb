@@ -147,7 +147,7 @@ export default class ElmEventSettings < HTMLElement
       
         <div class='d-flex flex-sm-row flex-column gap-2'>
           <button class='btn btn-outline-success btn-sm' onclick='eventSettingUsersBtnSendEmailClick()'>
-            <i class='bi bi-envelope'></i> Poslat E-mail
+            <i class='bi bi-envelope'></i> Poslat E-mail(y)
           </button>
 
           <div class='nav-item dropdown'>
