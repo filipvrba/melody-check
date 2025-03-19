@@ -198,6 +198,7 @@ export default class ElmEventSettings < HTMLElement
 </div>
 
 <elm-event-settings-modal></elm-event-settings-modal>
+<elm-event-candidate-modal></elm-event-candidate-modal>
     """
 
     self.innerHTML = template

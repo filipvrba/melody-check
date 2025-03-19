@@ -82,4 +82,10 @@ window.customElements.define(
 import ElmConfirmDate from "./elements/elm_confirm_date";
 window.customElements.define("elm-confirm-date", ElmConfirmDate);
 import ElmConfirmModal from "./elements/elm_confirm_modal";
-window.customElements.define("elm-confirm-modal", ElmConfirmModal)
+window.customElements.define("elm-confirm-modal", ElmConfirmModal);
+import ElmEventCandidateModal from "./elements/elm_event_candidate_modal";
+
+window.customElements.define(
+  "elm-event-candidate-modal",
+  ElmEventCandidateModal
+)

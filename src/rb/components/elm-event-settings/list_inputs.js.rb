@@ -17,6 +17,7 @@ export default class CListInputs
     @parent.c_spinner.set_display_with_id(false, '#spinnerTwo')
 
     window.event_settings_list_add_btn_click     = add_btn_click
+    window.event_settings_list_edit_btn_click    = edit_btn_click
     window.event_settings_list_remove_btn_click  = remove_btn_click
     window.event_settings_list_btn_form_click    = btn_form_click
     window.event_settings_list_btn_share_click   = btn_share_click
@@ -55,6 +56,13 @@ export default class CListInputs
       full_name: @input_full_name.value,
       email:     @input_email.value
     })
+  end
+
+  def edit_btn_click(index)
+    candidate = @parent.c_contents.get_candidate(index)
+    Modals.event_candidate(candidate) do
+      @parent.c_contents.update_list_container()
+    end
   end
 
   def remove_btn_click(candidate_id)

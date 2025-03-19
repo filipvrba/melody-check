@@ -58,3 +58,6 @@ window.custom_elements.define('elm-confirm-date', ElmConfirmDate)
 
 import 'ElmConfirmModal', './elements/elm_confirm_modal'
 window.custom_elements.define('elm-confirm-modal', ElmConfirmModal)
+
+import 'ElmEventCandidateModal', './elements/elm_event_candidate_modal'
+window.custom_elements.define('elm-event-candidate-modal', ElmEventCandidateModal)

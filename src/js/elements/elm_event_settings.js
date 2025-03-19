@@ -260,6 +260,7 @@ export default class ElmEventSettings extends HTMLElement {
 </div>
 
 <elm-event-settings-modal></elm-event-settings-modal>
+<elm-event-candidate-modal></elm-event-candidate-modal>
     `}`;
     return this.innerHTML = template
   }

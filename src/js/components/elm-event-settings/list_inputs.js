@@ -16,6 +16,7 @@ export default class CListInputs {
     this._inputFile = this._parent.querySelector("#eventSettingsListCandidatesFileInput");
     this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
     window.eventSettingsListAddBtnClick = this.addBtnClick.bind(this);
+    window.eventSettingsListEditBtnClick = this.editBtnClick.bind(this);
     window.eventSettingsListRemoveBtnClick = this.removeBtnClick.bind(this);
     window.eventSettingsListBtnFormClick = this.btnFormClick.bind(this);
     window.eventSettingsListBtnShareClick = this.btnShareClick.bind(this);
@@ -72,6 +73,15 @@ export default class CListInputs {
       "#app",
       CListInputs.ENVS.btnClick1,
       {fullName: this._inputFullName.value, email: this._inputEmail.value}
+    )
+  };
+
+  editBtnClick(index) {
+    let candidate = this._parent.cContents.getCandidate(index);
+
+    return Modals.eventCandidate(
+      candidate,
+      () => this._parent.cContents.updateListContainer()
     )
   };
 
