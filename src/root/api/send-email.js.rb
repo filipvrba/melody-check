@@ -1,6 +1,6 @@
 import 'mailjet', 'node-mailjet'
 
-MJ = mailjet.connect(process.env.MAILJET_API_KEY, process.env.MAILJET_SECRET_KEY)
+MJ = mailjet.api_connect(process.env.MAILJET_API_KEY, process.env.MAILJET_SECRET_KEY)
 
 export default async def handler(req, res)
   if req.method == 'POST'
