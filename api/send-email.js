@@ -28,14 +28,7 @@ export default async function handler(req, res) {
       HTMLPart: email.html
     }));
 
-    res.status(200).json({message: messages, result: result.body});
-    let request = MJ.post("send").request({Messages: messages});
-    result = await(request);
-
-    res.status(200).json({
-      message: "E-maily byly odeslány!",
-      result: result.body
-    })
+    res.status(200).json({message: "lol", result: messages})
   } catch (error) {
     res.status(500).json({
       error: "Chyba při odesílání e-mailů",
