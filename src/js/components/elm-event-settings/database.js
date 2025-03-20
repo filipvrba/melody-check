@@ -67,7 +67,23 @@ export default class CDatabase {
 
   getCandidates(callback) {
     this._parent.cSpinner.setDisplayWithId(true, "#spinnerTwo");
-    let query = `SELECT id, full_name, email FROM candidates WHERE event_id = ${this._parent.eventId};`;
+
+    // query = "SELECT id, full_name, email FROM candidates WHERE event_id = #{@parent.event_id};"
+    let query = `SELECT 
+    c.id, 
+    c.full_name, 
+    c.email, 
+    CASE 
+        WHEN el.id IS NOT NULL THEN 1 
+        ELSE 0 
+    END AS email_sent,
+    el.sent_at
+FROM candidates c
+LEFT JOIN email_logs el 
+    ON c.id = el.candidate_id 
+    AND el.email_type = 'informational'
+WHERE c.event_id = ${this._parent.eventId};
+`;
 
     return Net.bef(query, (rows) => {
       let decodeRows;
@@ -78,7 +94,9 @@ export default class CDatabase {
         decodeRows = rows.map(h => ({
           id: h.id,
           fullName: h.full_name.decodeBase64(),
-          email: h.email.decodeBase64()
+          email: h.email.decodeBase64(),
+          emailSent: parseInt(h.email_sent) === 1,
+          sentAt: h.sent_at
         }));
 
         if (callback) return callback(decodeRows)
@@ -106,6 +124,16 @@ export default class CDatabase {
 
     return Net.bef(query, (message) => {
       this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
+      if (callback) return callback(message)
+    })
+  };
+
+  addEmailLogs(idCandidates, callback) {
+    if (idCandidates.length <= 0) return;
+    let insertCandidates = idCandidates.map(id => `(${id}, 'informational')`);
+    let query = `INSERT OR REPLACE INTO email_logs (candidate_id, email_type) VALUES ${insertCandidates.join(", ")};`;
+
+    return Net.bef(query, (message) => {
       if (callback) return callback(message)
     })
   };

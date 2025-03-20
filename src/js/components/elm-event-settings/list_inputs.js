@@ -186,13 +186,12 @@ export default class CListInputs {
         idCandidates,
 
         candidates => (
-          Email.send(candidates, (message) => {
-            this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
-
-            for (let elmCandidate of elmCandidates) {
-              if (elmCandidate.checked) elmCandidate.checked = false
-            }
-          })
+          Email.send(candidates, emailMessage => (
+            this._parent.cDatabase.addEmailLogs(idCandidates, (message) => {
+              this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
+              if (message) return this._parent.cContents.updateListContainer()
+            })
+          ))
         )
       )
     };

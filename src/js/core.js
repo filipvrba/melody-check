@@ -10,4 +10,5 @@ import "./core/settings";
 import "./core/clock";
 import "./core/csv_parser";
 import "./core/modals";
-import "./core/email"
+import "./core/email";
+import "./core/date_utils"

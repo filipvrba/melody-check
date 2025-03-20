@@ -72,7 +72,22 @@ export default class CDatabase
   def get_candidates(&callback)
     @parent.c_spinner.set_display_with_id(true, '#spinnerTwo')
 
-    query = "SELECT id, full_name, email FROM candidates WHERE event_id = #{@parent.event_id};"
+    # query = "SELECT id, full_name, email FROM candidates WHERE event_id = #{@parent.event_id};"
+    query = "SELECT 
+    c.id, 
+    c.full_name, 
+    c.email, 
+    CASE 
+        WHEN el.id IS NOT NULL THEN 1 
+        ELSE 0 
+    END AS email_sent,
+    el.sent_at
+FROM candidates c
+LEFT JOIN email_logs el 
+    ON c.id = el.candidate_id 
+    AND el.email_type = 'informational'
+WHERE c.event_id = #{@parent.event_id};
+"
 
     Net.bef(query) do |rows|
       @parent.c_spinner.set_display_with_id(false, '#spinnerTwo')
@@ -84,6 +99,8 @@ export default class CDatabase
             id: h.id,
             full_name: h['full_name'].decode_base64(),
             email: h.email.decode_base64(),
+            email_sent: h['email_sent'].to_i == 1,
+            sent_at: h['sent_at']
           }
         end
 
@@ -121,6 +138,19 @@ export default class CDatabase
     Net.bef(query) do |message|
       @parent.c_spinner.set_display_with_id(false, '#spinnerTwo')
 
+      callback(message) if callback
+    end
+  end
+
+  def add_email_logs(id_candidates, &callback)
+    unless id_candidates.length > 0
+      return
+    end
+
+    insert_candidates = id_candidates.map {|id| "(#{id}, 'informational')"}
+    query = "INSERT OR REPLACE INTO email_logs (candidate_id, email_type) VALUES #{insert_candidates.join(', ')};"
+    
+    Net.bef(query) do |message|
       callback(message) if callback
     end
   end

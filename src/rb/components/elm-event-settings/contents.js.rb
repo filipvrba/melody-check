@@ -25,8 +25,13 @@ export default class CContents
         template = """
 <li class='list-group-item d-flex justify-content-between align-items-center'>
   <div class='form-check'>
-    <input class='form-check-input' type='checkbox' value='' id='eventSettingsListItemCheck-#{candidate.id}'>
-    <span>#{candidate.full_name} (#{candidate.email})</span>
+    <div>
+      <input class='form-check-input' type='checkbox' value='' id='eventSettingsListItemCheck-#{candidate.id}'>
+      <span>#{candidate.full_name} (#{candidate.email})</span>
+    </div>
+    <span id='eventSettingsListEmailStatus'>
+      #{email_status(candidate)}
+    </span>
   </div>
   <div class='d-flex gap-2'>
     <button type='button' class='btn btn-secondary btn-sm' onclick='eventSettingsListEditBtnClick(#{i})'>
@@ -44,5 +49,14 @@ export default class CContents
 
   def change_visibility(is_visible)
     Bootstrap.change_visible_element(@list_candidates, is_visible)
+  end
+
+  def email_status(candidate)
+    if candidate.email_sent
+      date = DateUtils.convert_to_czech_date(candidate.sent_at)
+      "<small class='text-success'><i class='bi bi-envelope-fill'></i> #{date}</small>"
+    else
+      "<small class='text-danger'><i class='bi bi-envelope-slash-fill'></i> neposláno</small>"
+    end
   end
 end

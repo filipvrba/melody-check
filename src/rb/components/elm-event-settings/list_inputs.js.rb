@@ -157,14 +157,16 @@ export default class CListInputs
 
       @parent.c_spinner.set_display_with_id(true, '#spinnerTwo')
       @parent.c_database.email_candidates(id_candidates) do |candidates|
-        Email.send(candidates) do |message|
-          @parent.c_spinner.set_display_with_id(false, '#spinnerTwo')
+        Email.send(candidates) do |email_message|
           
-          elm_candidates.each do |elm_candidate|
-            if elm_candidate.checked
-              elm_candidate.checked = false
-            end
+          # TODO: error from email api
+
+          @parent.c_database.add_email_logs(id_candidates) do |message|
+            @parent.c_spinner.set_display_with_id(false, '#spinnerTwo')
+
+            @parent.c_contents.update_list_container() if message
           end
+
         end
       end
     end

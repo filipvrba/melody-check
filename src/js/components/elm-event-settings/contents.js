@@ -24,8 +24,13 @@ export default class CContents {
         let template = `${`
 <li class='list-group-item d-flex justify-content-between align-items-center'>
   <div class='form-check'>
-    <input class='form-check-input' type='checkbox' value='' id='eventSettingsListItemCheck-${candidate.id}'>
-    <span>${candidate.fullName} (${candidate.email})</span>
+    <div>
+      <input class='form-check-input' type='checkbox' value='' id='eventSettingsListItemCheck-${candidate.id}'>
+      <span>${candidate.fullName} (${candidate.email})</span>
+    </div>
+    <span id='eventSettingsListEmailStatus'>
+      ${this.emailStatus(candidate)}
+    </span>
   </div>
   <div class='d-flex gap-2'>
     <button type='button' class='btn btn-secondary btn-sm' onclick='eventSettingsListEditBtnClick(${i})'>
@@ -46,5 +51,16 @@ export default class CContents {
       this._listCandidates,
       isVisible
     )
+  };
+
+  emailStatus(candidate) {
+    let date;
+
+    if (candidate.emailSent) {
+      date = DateUtils.convertToCzechDate(candidate.sentAt);
+      return `<small class='text-success'><i class='bi bi-envelope-fill'></i> ${date}</small>`
+    } else {
+      return "<small class='text-danger'><i class='bi bi-envelope-slash-fill'></i> neposláno</small>"
+    }
   }
 }
