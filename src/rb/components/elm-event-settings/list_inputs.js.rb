@@ -18,7 +18,7 @@ export default class CListInputs
 
     window.event_settings_list_add_btn_click        = add_btn_click
     window.event_settings_list_edit_btn_click       = edit_btn_click
-    window.event_settings_list_remove_btn_click     = remove_btn_click
+    window.event_settings_list_btn_remove_click     = btn_remove_click
     window.event_settings_list_btn_form_click       = btn_form_click
     window.event_settings_list_btn_share_click      = btn_share_click
     window.event_settings_list_btn_import_click     = btn_import_click
@@ -66,16 +66,32 @@ export default class CListInputs
     end
   end
 
-  def remove_btn_click(candidate_id)
+  def btn_remove_click()
+    elm_candidates  = Array.from(
+      @parent.c_contents.list_container.query_selector_all('[id^="eventSettingsListItemCheck'))
+
+    info_candidates = elm_candidates.map do |candidate|
+      {candidate_id: candidate.id.split('-')[1], checked: candidate.checked}
+    end
+    checked_candidates = info_candidates.select {|h| h.checked}
+
+    id_candidates = []
+    unless checked_candidates.length > 0
+      return
+    end
+
     fn_true = lambda do
-      @parent.c_database.remove_candidate(candidate_id) do |message|
+      id_candidates = checked_candidates.map{|h| h.candidate_id.to_i}
+
+      @parent.c_database.remove_candidates(id_candidates) do |message|
         if message
           @parent.c_contents.update_list_container()
         end
       end
     end
 
-    Modals.confirm({fn_true: fn_true})
+    Modals.confirm({fn_true: fn_true,
+      message: "<p>Opravdu chcete smazat vybrané kandidáty ze seznamu událostí?</p>"})
   end
 
   def btn_form_click()

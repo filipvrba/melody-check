@@ -95,8 +95,12 @@ export default class CDatabase
 
   end
 
-  def remove_candidate(candidate_id, &callback)
-    query = "DELETE FROM candidates WHERE id = #{candidate_id};"
+  def remove_candidates(id_candidates, &callback)
+    unless id_candidates.length > 0
+      return
+    end
+
+    query = "DELETE FROM candidates WHERE id IN (#{id_candidates.join(', ')});"
 
     @parent.c_spinner.set_display_with_id(true, '#spinnerTwo')
     Net.bef(query) do |message|

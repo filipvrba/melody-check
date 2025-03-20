@@ -17,7 +17,7 @@ export default class CListInputs {
     this._parent.cSpinner.setDisplayWithId(false, "#spinnerTwo");
     window.eventSettingsListAddBtnClick = this.addBtnClick.bind(this);
     window.eventSettingsListEditBtnClick = this.editBtnClick.bind(this);
-    window.eventSettingsListRemoveBtnClick = this.removeBtnClick.bind(this);
+    window.eventSettingsListBtnRemoveClick = this.btnRemoveClick.bind(this);
     window.eventSettingsListBtnFormClick = this.btnFormClick.bind(this);
     window.eventSettingsListBtnShareClick = this.btnShareClick.bind(this);
     window.eventSettingsListBtnImportClick = this.btnImportClick.bind(this);
@@ -86,14 +86,34 @@ export default class CListInputs {
     )
   };
 
-  removeBtnClick(candidateId) {
-    let fnTrue = () => (
-      this._parent.cDatabase.removeCandidate(candidateId, (message) => {
-        if (message) return this._parent.cContents.updateListContainer()
-      })
-    );
+  btnRemoveClick() {
+    let elmCandidates = Array.from(this._parent.cContents.listContainer.querySelectorAll("[id^=\"eventSettingsListItemCheck"));
 
-    return Modals.confirm({fnTrue})
+    let infoCandidates = elmCandidates.map(candidate => ({
+      candidateId: candidate.id.split("-")[1],
+      checked: candidate.checked
+    }));
+
+    let checkedCandidates = infoCandidates.filter(h => h.checked);
+    let idCandidates = [];
+    if (checkedCandidates.length <= 0) return;
+
+    let fnTrue = () => {
+      idCandidates = checkedCandidates.map(h => parseInt(h.candidateId));
+
+      return this._parent.cDatabase.removeCandidates(
+        idCandidates,
+
+        (message) => {
+          if (message) return this._parent.cContents.updateListContainer()
+        }
+      )
+    };
+
+    return Modals.confirm({
+      fnTrue,
+      message: "<p>Opravdu chcete smazat vybrané kandidáty ze seznamu událostí?</p>"
+    })
   };
 
   btnFormClick() {

@@ -88,8 +88,9 @@ export default class CDatabase {
     })
   };
 
-  removeCandidate(candidateId, callback) {
-    let query = `DELETE FROM candidates WHERE id = ${candidateId};`;
+  removeCandidates(idCandidates, callback) {
+    if (idCandidates.length <= 0) return;
+    let query = `DELETE FROM candidates WHERE id IN (${idCandidates.join(", ")});`;
     this._parent.cSpinner.setDisplayWithId(true, "#spinnerTwo");
 
     return Net.bef(query, (message) => {

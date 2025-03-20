@@ -168,6 +168,10 @@ export default class ElmEventSettings < HTMLElement
               <li><button class='dropdown-item'onclick='eventSettingsListBtnExportClick()'>
                 Export CSV
               </button></li>
+              <li><hr class='dropdown-divider'></li>
+              <li><button class='dropdown-item'onclick='eventSettingsListBtnRemoveClick()'>
+                Smazat
+              </button></li>
             </ul>
           </div>
         </div>

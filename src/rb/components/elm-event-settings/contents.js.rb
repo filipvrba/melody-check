@@ -29,11 +29,8 @@ export default class CContents
     <span>#{candidate.full_name} (#{candidate.email})</span>
   </div>
   <div class='d-flex gap-2'>
-    <button type='button' class='btn btn-warning btn-sm' onclick='eventSettingsListEditBtnClick(#{i})'>
+    <button type='button' class='btn btn-secondary btn-sm' onclick='eventSettingsListEditBtnClick(#{i})'>
       <i class='bi bi-pen'></i>
-    </button>
-    <button type='button' class='btn btn-danger btn-sm' onclick='eventSettingsListRemoveBtnClick(#{candidate.id})'>
-      <i class='bi bi-trash'></i>
     </button>
   </div>
 </li>
